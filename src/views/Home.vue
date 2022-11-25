@@ -13,10 +13,5 @@
 </template>
 
 <style scoped>
-    .home{
-        width: 100%;
-        height: 100vh;
-        background-color: #E72C70;
-        color: #E72C70;
-    }
+
 </style>

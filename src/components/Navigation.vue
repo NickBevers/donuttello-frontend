@@ -19,14 +19,4 @@
 
 <style scoped>
 
-    :root{
-        --pink--main: #E72C70;
-    }   
-     
-    .nav{
-        width: 100%;
-        background-color: var(--pink--main);
-        color: var(--pink--main);
-    }
-
 </style>
