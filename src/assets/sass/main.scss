@@ -1,4 +1,10 @@
+@import "./modules/reset";
 @import "./modules/colors";
 @import "./modules/typography";
-@import "./modules/variables";
 @import "./modules/navigation";
+@import "./modules/home";
+
+a{
+    text-decoration: none;
+    color: white;
+}
