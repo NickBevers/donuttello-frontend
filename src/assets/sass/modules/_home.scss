@@ -9,7 +9,7 @@
     left: 0;
     height: 100vh;
     width: 100vw;
-    background-color: #00000050;
+    background-color: #00000065;
     background-image: linear-gradient(#00000080, #00000080), url("/src/assets/donuts-bg.jpg");
     background-blend-mode: darken;
     background-size: cover;
@@ -31,10 +31,13 @@
     align-items: center;
 
     h1{
+        width: 42%;
+        text-align: center;
         font-size: $font__size--title;
         font-family: $font--heading;
         font-weight: $font__weight--heading;
         color: $blue--main;
+        word-wrap: break-word;
     }
 
     p{
@@ -43,5 +46,29 @@
         font-weight: $font__weight--main;
         color: $white;
         margin-top: 2rem;
+        line-height: 1.8rem;
+        text-align: center;
+    }
+
+    .button__container{
+        width: 40%;
+        display: flex;
+        justify-content: center;
+        
+        .button__text{
+            font-size: $font__size--btn;
+            font-family: $font--heading;
+            font-weight: $font__weight--heading;
+            text-transform: uppercase;
+            color: $black;
+            margin-top: 2rem;
+            padding: 1.2rem;
+            background-color: $yellow--main;
+            border-radius: 0.8rem;
+
+            &:hover{
+                background-color: $yellow--off;
+            }
+        }
     }
 }
