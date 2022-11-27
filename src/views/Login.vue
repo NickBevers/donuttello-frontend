@@ -6,8 +6,12 @@
 </script>
 
 <template>
-    <div class="">
+    <div class="login__container">
         <Navigation />
-        <LoginForm />
+        <div class="form__container--login">
+            <h3>Meld je hier aan</h3>
+            <LoginForm />
+        </div>
+
     </div>
 </template>
