@@ -1,0 +1,129 @@
+@import "./typography";
+@import "./colors";
+
+.form__container--login{
+    width: clamp(30%, 60%, 900px);
+    height: calc(100vh - 5.7rem);
+    margin: 0 auto;
+    padding-top: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    font-family: $font--heading;
+    font-weight: 400;
+
+    h3{
+        font-size: $font__size--subtitle;
+        // font-weight: $font__weight--heading;
+        color: $black;
+        margin-bottom: 4rem;
+    }
+}
+
+.form__container{
+    width: clamp(30%, 60%, 900px);
+    height: 100%;
+    margin: -2rem auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+
+
+    .form__item{
+        width: 100%;
+        margin-bottom: 2rem;
+        display: flex;
+        flex-direction: column;
+
+        label{
+            font-size: 16px;
+            color: $grey;
+            font-family: inherit;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+        }
+
+        input{
+            padding: 0.5rem 0.5rem;
+            border: none;
+            border-bottom: 2px solid $pink--main;
+            font-size: $font__size--input;
+            color: $grey;
+            width: 100%;
+            height: 45px;
+            box-sizing: border-box;
+        }
+
+        input:focus{
+            outline: none;
+            border-bottom: 2px solid $blue--main;
+        }
+    }
+
+    .form__item--password{
+        width: 100%;
+        position: relative;
+
+        .icon--eye{
+            position: absolute;
+            top: 25%;
+            right: 0;
+            color: $black;
+            cursor: pointer;
+            padding: 0.2rem 0.8rem;
+        }
+    }
+
+    .form__item--submit{
+        width: 100%;
+        display: flex;
+        justify-content: start;
+
+        button{
+            width: 8rem;
+            height: 45px;
+            border: none;
+            background-color: $pink--main;
+            color: $white;
+            font-size: $font__size--btn;
+            font-family: inherit;
+            text-transform: uppercase;
+            letter-spacing: 0.03rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: $font__weight--heading;
+            border-radius: 100px;
+            padding: 0.3rem;
+            box-sizing: content-box;
+
+            &:hover{
+                color: $yellow--main;
+            }
+        }
+    }
+
+    .form__item--forgot{
+        width: 100%;
+        margin-top: -1.5rem;
+        
+        a{
+            color: $pink--main;
+            font-size: $font__size--subLabel;
+            font-family: inherit;
+            text-transform: uppercase;
+            text-align: end;
+            letter-spacing: 0.03rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: $font__weight--heading;
+            text-decoration: none;
+
+            &:hover{
+                color: $blue--main;
+            }
+        }
+    }
+}
