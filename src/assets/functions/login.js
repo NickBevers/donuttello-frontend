@@ -1,10 +1,8 @@
-export function login(jwtToken, email, password) {
-    console.log(jwtToken);
+export async function login(email, password) {
     fetch("https://donuttello-backend.onrender.com/api/v1/users/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authentication": `Bearer ${jwtToken}`
         },
         body: JSON.stringify({ email, password }),
     })
