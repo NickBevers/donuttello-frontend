@@ -1,15 +1,53 @@
 <script setup>
     import { ref } from 'vue';
-    
-    const showPassword = ref(true);
+    import { login } from '../assets/functions/login';
+  
+    const email = ref('');
+    const password = ref('');
+    const showPassword = ref(false);
+    const loginErrorStatus = ref(null);
+    const loginErrorMessage = ref('');
+
     const togglePassword = () => {
         showPassword.value = !showPassword.value;
+    }
+
+    async function loginSubmit() {
+        fetch("https://donuttello-backend.onrender.com/api/v1/users/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ "email": email.value , "password": password.value }),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.status === "success") {
+                console.log(data);
+                localStorage.setItem("jwtToken", data.token);
+                email.value = "";
+                password.value = "";
+                showPassword.value = false;
+                location.href = "/dashboard";
+            } else {
+                loginErrorStatus.value = data.status;
+                loginErrorMessage.value = data.message;
+                setTimeout(() => {
+                    loginErrorStatus.value = null;
+                    loginErrorMessage.value = '';
+                }, 5000);
+            }
+        });
+
     }
 </script>
 
 <template>
     <div class="form__container">
-        <form @submit.prevent="handleSubmit">
+        <div class="form__error" v-if="loginErrorStatus">
+            <p class="form__error__text"> {{ loginErrorMessage }} </p>
+        </div>
+        <form @submit.prevent="loginSubmit">
             <div class="form__item">
                 <label for="email">E-mailadres</label>
                 <input type="email" id="email" name="email" placeholder="Email" v-model="email"/>
@@ -35,20 +73,3 @@
         </form>
     </div>
 </template>
-
-<script>
-    export default {
-        name: 'LoginForm',
-        data() {
-            return {
-                email: '',
-                password: '',
-            }
-        },
-        methods: {
-            handleSubmit() {
-                console.log("submitted form");
-            }
-        }
-    }
-</script>
