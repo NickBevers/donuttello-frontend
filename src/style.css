@@ -11,7 +11,7 @@
     font-weight: bold;
     margin: 0;
 }
-.confSidebar__item__header__button {
+.confSidebar__item__toggle {
     font-size: 1.5em;
     font-weight: bold;
     margin: 0 0 0 1em;
@@ -20,11 +20,4 @@
     background-color: transparent;
     cursor: pointer;
     color: #212529;
-}
-.confSidebar__item__header__button--false {
-    background-color: #dedede;
-}
-.confSidebar__item__header__button--true {
-    background-color: #28a745;
-    color: #fff;
 }

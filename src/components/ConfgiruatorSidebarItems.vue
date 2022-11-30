@@ -1,12 +1,19 @@
 <script setup>
 
+const checked = 'test';
+const test = () => {
+  console.log('checkbox works');
+}
+
 </script>
 
 <template>
   <div class="confSidebar__item">
   <header class="confSidebar__item__header">
     <h3 class="confSidebar__item__header__heading">This is the header of the SidebarListItems</h3>
-    <a href="#" class="confSidebar__item__header__button confSidebar__item__header__button--false">Off</a>
+    <input type="checkbox" id="checkbox" v-model="checked" @click="test"/>
+    <label for="checkbox">{{ checked }}</label>
+
   </header>
   <section>
     <ul>
