@@ -30,6 +30,8 @@
 .confSidebar__item__section {
     padding: 1em 0;
     background-color: #82D1E4;
+    display: flex;
+    flex-flow: column;
 }
 .confSidebar__item__section--listing {
     display: flex;
@@ -43,4 +45,12 @@
     height: 3em;
     margin: 0 1em 0 0;
     background-color: #C4C03A;
+}
+.input__file__label{
+    padding: 2em 0;
+    border-radius: 0.5em;
+    border: 1px dashed #212529;
+}
+.input__file {
+    display: none;
 }

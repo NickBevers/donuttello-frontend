@@ -36,7 +36,7 @@ const test = () => {
       Upload your logo here <br>
       We accept png's, jpg's, jpeg's and webp's
     </label>
-    <input class="input__file" type="file" id="fileUpload" name="fileUpload" @change="previewFiles">
+    <input class="input__file" type="file" id="fileUpload" name="fileUpload">
   </section>
   <form action="">
     <textarea name="" id="" cols="30" rows="10">
