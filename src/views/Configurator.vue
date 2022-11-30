@@ -1,5 +1,6 @@
 <script setup>
     import Navigation from '../components/Navigation.vue';
+    import ConfiguratorSidebar from '../components/ConfiguratorSidebar.vue';
 
 </script>
 
@@ -7,6 +8,7 @@
     <div class="home">
         <Navigation />
         <p class="homeText">Home</p>
+        <ConfiguratorSidebar />
     </div>
 </template>
 
