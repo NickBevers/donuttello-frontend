@@ -1,5 +1,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@400;600;700&family=Lato&display=swap');
 
+:root{
+    --pink--main: #E72C70;
+    --blue--main: #82D1E4;
+    --yellow--main: #F7F249;
+    --yellow--off: #C4C03A;
+    --white: #FFFFFF;
+    --black: #000000;
+    --grey: #212529;
+
+    --pink--secondary: #FF4C8E;
+    --blue--secondary: #60D1D6;
+    --yellow--secondary: #F7E200;
+
+    --pink--pastel: #FF98C0;
+    --blue--pastel: #CAE3E8;
+    --yellow--pastel: #F8F594;
+
+    --border-radius: 12px;
+
+    --font--family--primary: 'Dosis', sans-serif;
+    --font--family--secondary: 'Lato', sans-serif;
+
+    --font-weight--regular: 400;
+    --font-weight--semi-bold: 600;
+    --font-weight--bold: 700;
+
+    --font-size--small: 1.2rem;
+    --font-size--medium: 1.4rem;
+    --font-size--large: 1.6rem;
+    --font-size--xlarge: 2.4rem;
+    --font-size--xxlarge: 3.2rem;
+    --font-size--xxxlarge: 4.8rem;
+
+    font-family: 'Dosis', sans-serif;
+    font-weight: 400;
+
+    --padding-extra-small: 0.5em;
+    --padding-small: 0.75em;
+    --padding-medium: 1em;
+    --padding-large: 2em;
+
+}
+
 
 .confSidebar__item {
     background-color: #f5f5f5;

@@ -1,6 +1,7 @@
 <script setup>
     import { onMounted, ref } from 'vue'
     import Navigation from '../components/Navigation.vue';
+    import DonutCard from '../components/Dashboard/DonutCard.vue';
 
     const jwtToken = ref(localStorage.getItem('jwtToken'));
     const donuts = ref([]);
@@ -55,9 +56,8 @@
     <div class="home">
         <Navigation />
         <div class="dashboard__container">
-            <div class="dashboard__container__header">
-                <h1>Dashboard</h1>
-                <div class="dashboard__container__header__filter">
+            <div class="filter__container">
+                <div class="filter">
                     <label for="filter">Filter</label>
                     <select name="filter" id="filter" v-model="filter" v-on:change="getDonuts">
                         <option value="all">All</option>
@@ -67,19 +67,30 @@
                     {{ filter }}
                 </div>
             </div>
-            <div class="dashboard__container__donuts">
-                <div class="dashboard__container__donuts__donut" v-for="donut in donuts" :key="donut.id">
-                    <div class="dashboard__container__donuts__donut__image">
-                        <img :src="donut.image" alt="donut">
-                    </div>
-                    <div class="dashboard__container__donuts__donut__info">
-                        <h2>{{ donut.name }}</h2>
-                        <p>{{ donut.description }}</p>
-                        <p>{{ donut.price }}</p>
+
+            <div class="donuts__container">
+                <div class="donuts__container__title">
+                    <h2 v-if="filter == 'all'">Alle Donuts</h2>
+                    <h2 v-else-if="filter == 'order'">Bestellingen</h2>
+                    <h2 v-else>Creaties</h2>
+                </div>
+
+                <div class="donut__card__container">
+                    <div v-for="donut in donuts" :key="donut._id" class="donut__card">
+                        <DonutCard :donut="donut" />
                     </div>
                 </div>
-                
             </div>
         </div>
     </div>
 </template>
+
+<style scoped>
+    .donut__card__container{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5em;
+    }
+</style>
