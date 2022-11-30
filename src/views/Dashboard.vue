@@ -58,13 +58,12 @@
         <div class="dashboard__container">
             <div class="filter__container">
                 <div class="filter">
-                    <label for="filter">Filter</label>
-                    <select name="filter" id="filter" v-model="filter" v-on:change="getDonuts">
-                        <option value="all">All</option>
-                        <option value="order" selected>Ordered</option>
-                        <option value="notOrder">Not Ordered</option>
+                    <label for="filter" class="filter__label">Wat te tonen: </label>
+                    <select name="filter" class="filter__input" id="filter" v-model="filter" v-on:change="getDonuts">
+                        <option value="all">Alles</option>
+                        <option value="order" selected>Bestellingen</option>
+                        <option value="notOrder">Creaties</option>
                     </select>
-                    {{ filter }}
                 </div>
             </div>
 
@@ -86,11 +85,55 @@
 </template>
 
 <style scoped>
+
+    .filter{
+        position: absolute;
+        top: 8.7em;
+        right: 5em;
+    }
+
+    .filter__label{
+        font-size: var(--font-size--medium);
+        font-weight: var(--font-weight-semibold);
+        color: var(--pink--main);
+    }
+
+    .filter__input{
+        margin-left: 1em;
+        padding: 0.2em 0.5em;
+        border: none;
+        border-radius: 0.5em;
+        background-color: var(--pink--main);
+        color: var(--white);
+        font-size: var(--font-size--small);
+        font-weight: var(--font-weight-semibold);
+    }
+
+    .filter__input:focus{
+        outline: none;
+    }
+
+    .filter__input:hover{
+        cursor: pointer;
+    }
+
+    .filter__input option{
+        background-color: var(--pink--main);
+        color: var(--white);
+    }
+
+    .donuts__container__title{
+        margin: var(--margin-medium) 0;
+        font-size: var(--font-size--xlarge);
+        font-weight: var(--font-weight--bold);
+        text-align: center;
+    }
     .donut__card__container{
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
         gap: 1.5em;
+        margin-top: var(--margin-xxxlarge);
     }
 </style>

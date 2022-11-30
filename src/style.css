@@ -41,6 +41,14 @@
     --padding-medium: 1em;
     --padding-large: 2em;
 
+    --margin-extra-small: 0.5em;
+    --margin-small: 0.75em;
+    --margin-medium: 1em;
+    --margin-large: 2em;
+    --margin-xlarge: 3em;
+    --margin-xxlarge: 4em;
+    --margin-xxxlarge: 5em;
+
 }
 
 

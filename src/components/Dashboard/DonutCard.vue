@@ -17,8 +17,6 @@
             <p class="donut__card__company">{{ donut.company }}</p>
             <p class="donut__card__name">{{ donut.name }}</p>
         </div>
-
-        
     </div>
         
 </template>
