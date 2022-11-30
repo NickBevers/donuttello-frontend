@@ -16,14 +16,14 @@ const test = () => {
     <input type="checkbox" id="checkbox" v-model="checked" @click="test"/>
 
   </header>
-  <section>
-    <ul>
-      <li>Option 1</li>
-      <li>Option 2</li>
-      <li>Option 3</li>
-      <li>Option 4</li>
-      <li>Option 5</li>
-      <li>Option x</li>
+  <section class="confSidebar__item__section">
+    <ul class="confSidebar__item__section--listing">
+      <li class="listing__item">Option 1</li>
+      <li class="listing__item">Option 2</li>
+      <li class="listing__item">Option 3</li>
+      <li class="listing__item">Option 4</li>
+      <li class="listing__item">Option 5</li>
+      <li class="listing__item">Option x</li>
     </ul>
   </section>
   <section>

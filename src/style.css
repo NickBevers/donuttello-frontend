@@ -1,5 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@400;600;700&family=Lato&display=swap');
+
+
 .confSidebar__item {
     background-color: #f5f5f5;
+    font-size: 1em;
+    font-family: 'Lato', sans-serif;
 }
 .confSidebar__item__header {
     padding: 1em 0;
@@ -8,6 +13,7 @@
 }
 .confSidebar__item__header__heading {
     font-size: 1.5em;
+    font-family: 'Dosis', sans-serif;;
     font-weight: bold;
     margin: 0;
 }
@@ -20,4 +26,21 @@
     background-color: transparent;
     cursor: pointer;
     color: #212529;
+}
+.confSidebar__item__section {
+    padding: 1em 0;
+    background-color: #82D1E4;
+}
+.confSidebar__item__section--listing {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow: row;
+}
+.listing__item {
+    padding: 0;
+    width: 3em;
+    height: 3em;
+    margin: 0 1em 0 0;
+    background-color: #C4C03A;
 }
