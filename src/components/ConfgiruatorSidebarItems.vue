@@ -1,8 +1,10 @@
 <script setup>
 
-const checked = 'test';
+import{ref} from "vue";
+
+const checked = ref(false);
 const test = () => {
-  console.log('checkbox works');
+  console.log(checked.value);
 }
 
 </script>
