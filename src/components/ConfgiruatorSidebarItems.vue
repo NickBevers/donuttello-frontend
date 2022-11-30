@@ -14,7 +14,6 @@ const test = () => {
   <header class="confSidebar__item__header">
     <h3 class="confSidebar__item__header__heading">This is the header of the SidebarListItems</h3>
     <input type="checkbox" id="checkbox" v-model="checked" @click="test"/>
-    <label for="checkbox">{{ checked }}</label>
 
   </header>
   <section>
