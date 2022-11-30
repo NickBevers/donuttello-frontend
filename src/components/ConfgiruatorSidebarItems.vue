@@ -6,6 +6,8 @@ const checked = ref(false);
 const test = () => {
   console.log(checked.value);
 }
+// read input file name
+
 
 </script>
 
@@ -29,12 +31,16 @@ const test = () => {
   <section>
     This is the color picker section
   </section>
-  <section>
-    <input type="file">
+  <section class="confSidebar__item__section">
+    <label for="fileUpload" class="input__file__label">
+      Upload your logo here <br>
+      We accept png's, jpg's, jpeg's and webp's
+    </label>
+    <input class="input__file" type="file" id="fileUpload" name="fileUpload" @change="previewFiles">
   </section>
   <form action="">
     <textarea name="" id="" cols="30" rows="10">
-      Here is a textfield
+      Here is a text field
     </textarea>
   </form>
   </div>
