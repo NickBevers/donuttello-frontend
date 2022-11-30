@@ -30,7 +30,7 @@ const test = () => {
     This is the color picker section
   </section>
   <section>
-    This is the upload logo section
+    <input type="file">
   </section>
   <form action="">
     <textarea name="" id="" cols="30" rows="10">
