@@ -50,8 +50,14 @@
     --margin-xxxlarge: 5em;
 
 }
-
-
+body {
+    overflow-x: hidden;
+    overflow-y: scroll!important;
+}
+.confSidebar {
+    width: 30%;
+    padding: 2em;
+}
 .confSidebar__item {
     background-color: #f5f5f5;
     font-size: 1em;
@@ -88,14 +94,21 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    flex-flow: row;
+    flex-flow: wrap;
 }
 .listing__item {
     padding: 0;
-    width: 3em;
-    height: 3em;
-    margin: 0 1em 0 0;
+    margin: 0 1em 1em 0;
+    width: 4em;
+    height: 4em;
     background-color: #C4C03A;
+}
+.listing__item__image {
+    padding: 0;
+    width: 4em;
+    height: 4em;
+    border-radius: 0.5em;
+    border: 1px solid var(--grey);
 }
 .input__file__label{
     padding: 2em 0;
