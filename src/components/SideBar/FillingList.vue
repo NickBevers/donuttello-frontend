@@ -9,7 +9,7 @@ const test = () => {
 <template>
   <div class="confSidebar__item">
     <header class="confSidebar__item__header">
-      <h3 class="confSidebar__item__header__heading">This is the header of the SidebarListItems</h3>
+      <h3 class="confSidebar__item__header__heading">Filling</h3>
       <input type="checkbox" id="checkbox" v-model="checked" @click="test"/>
 
     </header>
