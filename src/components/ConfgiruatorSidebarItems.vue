@@ -1,17 +1,15 @@
 <script setup>
-
-import{ref} from "vue";
-
-const checked = ref(false);
-const test = () => {
-  console.log(checked.value);
-}
-// read input file name
-
-
+import ItemList from './SideBar/ItemList.vue';
+import Textfield from './SideBar/Textfield.vue';
+import UploadLogo from './SideBar/UploadLogo.vue';
 </script>
 
 <template>
+  <div class="confSidebar">
+    <ItemList />
+    <Textfield />
+    <UploadLogo />
+  </div>
 </template>
 
 
