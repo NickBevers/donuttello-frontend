@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 // make array of flavours
-const flavours = ref([
+const GlaceFlavour = ref([
     {
       flavour: 'pistache',
       image: 'https://www.averiecooks.com/wp-content/uploads/2016/03/bananabreaddonuts-6.jpg'
@@ -116,8 +116,11 @@ const flavours = ref([
     </header>
     <section class="confSidebar__item__section">
       <ul class="confSidebar__item__section--listing">
-        <li v-for="flavour in flavours" class="listing__item">
-          {{flavour.flavour}}
+        <li v-for="GlaceFlavour in GlaceFlavour" class="listing__item">
+            <img :src="GlaceFlavour.image" alt="GlaceFlavour" class="listing__item__image">
+          <p>
+            {{GlaceFlavour.flavour}}
+          </p>
         </li>
       </ul>
     </section>
