@@ -1,0 +1,25 @@
+<script setup>
+import { ref } from 'vue'
+import { ColorPicker } from 'vue-accessible-color-picker';
+
+const color = ref('#000000');
+
+function updateColor (e) {
+  color.value = e.cssColor;
+}
+</script>
+<template>
+  <div class="confSidebar__item">
+    <header class="confSidebar__item__header">
+      <h3 class="confSidebar__item__header__heading">Type of dough</h3>
+    </header>
+    <div class="colorpicker__container">
+      <ColorPicker :color="color" :visible-formats="['hex']" @color-change="updateColor"/>
+      {{ color }}
+    </div>
+  </div>
+</template>
+
+<style scoped>
+
+</style>
