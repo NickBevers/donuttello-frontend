@@ -118,9 +118,6 @@ const GlaceFlavour = ref([
       <ul class="confSidebar__item__section--listing">
         <li v-for="GlaceFlavour in GlaceFlavour" class="listing__item">
             <img :src="GlaceFlavour.image" alt="GlaceFlavour" class="listing__item__image">
-          <p>
-            {{GlaceFlavour.flavour}}
-          </p>
         </li>
       </ul>
     </section>
