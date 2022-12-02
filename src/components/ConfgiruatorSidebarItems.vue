@@ -1,14 +1,24 @@
 <script setup>
-import ItemList from './SideBar/ItemList.vue';
-import Textfield from './SideBar/Textfield.vue';
+import DoughType from './SideBar/DoughType.vue';
+import FillingList from './SideBar/FillingList.vue';
+import GlaceColour from './SideBar/GlaceColour.vue';
+import GlaceFlavour from './SideBar/GlaceFlavour.vue';
+import Toppings from './SideBar/Toppings.vue';
 import UploadLogo from './SideBar/UploadLogo.vue';
+import LogoShape from './SideBar/LogoShape.vue';
+import TextField from './SideBar/TextField.vue';
 </script>
 
 <template>
   <div class="confSidebar">
-    <ItemList />
-    <Textfield />
+    <DoughType />
+    <FillingList />
+    <GlaceColour />
+    <GlaceFlavour />
+    <Toppings />
     <UploadLogo />
+    <LogoShape />
+    <TextField />
   </div>
 </template>
 
