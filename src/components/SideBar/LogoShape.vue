@@ -4,7 +4,7 @@ import{ref} from "vue";
 <template>
   <div class="confSidebar__item">
     <header class="confSidebar__item__header">
-      <h3 class="confSidebar__item__header__heading">Type of dough</h3>
+      <h3 class="confSidebar__item__header__heading">Select logo shape</h3>
 
     </header>
     <section class="confSidebar__item__section">
