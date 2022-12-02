@@ -1,6 +1,6 @@
 <script setup>
     import { ref } from 'vue'
-    import SidebarItem from './ConfgiruatorSidebarItems.vue';
+    import SidebarItem from './ConfiguratorSidebarItems.vue';
 </script>
 
 <template>
