@@ -12,13 +12,6 @@ const test = () => {
 </script>
 
 <template>
-  <div class="confSidebar__item">
-  <form action="">
-    <textarea name="" id="" cols="30" rows="10">
-      Here is a text field
-    </textarea>
-  </form>
-  </div>
 </template>
 
 
