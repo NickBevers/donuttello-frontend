@@ -77,7 +77,7 @@
         }
     }
 
-    .form__item--submit{
+    .form__item--submit, .form__item--reset{
         width: 100%;
         display: flex;
         justify-content: start;
@@ -103,6 +103,10 @@
                 color: $yellow--main;
             }
         }
+    }
+
+    .form__item--reset button{
+        width: 20ch;
     }
 
     .form__item--forgot{
