@@ -2,7 +2,7 @@
     <nav>
         <div class="navigation__container">
             <div class="navigation__logo">
-                <img src="../assets/donuttello-logo.svg" alt="logo">
+                <img src="../assets/images/donuttello-logo.svg" alt="logo">
             </div>
             <div class="navigation__item__container">
                 <router-link class="navigation__item" exact to="/"><a>Home</a></router-link>
