@@ -2,8 +2,8 @@
     import { ref } from 'vue'
     import DoughType from './SideBar/DoughType.vue';
     import FillingList from './SideBar/FillingList.vue';
-    import GlaceColour from './SideBar/GlazeColour.vue';
-    import GlaceFlavour from './SideBar/GlazeFlavour.vue';
+    import GlazeColour from './SideBar/GlazeColour.vue';
+    import GlazeFlavour from './SideBar/GlazeFlavour.vue';
     import Toppings from './SideBar/Toppings.vue';
     import UploadLogo from './SideBar/UploadLogo.vue';
     import LogoShape from './SideBar/LogoShape.vue';
@@ -14,8 +14,8 @@
     <div class="confSidebar">
         <!-- <DoughType /> -->
         <FillingList />
-        <GlaceColour />
-        <!-- <GlaceFlavour /> -->
+        <GlazeColour />
+        <!-- <GlazeFlavour /> -->
         <Toppings />
         <UploadLogo />
         <LogoShape />
@@ -24,5 +24,11 @@
 </template>
 
 <style scoped>
-
+    .confSidebar{
+        width: 30%;
+        height: calc(100vh - 5.7em);
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: var(--pink--main) var(--white);
+    }
 </style>

@@ -3,10 +3,10 @@
 <template>
   <div class="confSidebar__item">
     <header class="confSidebar__item__header">
-      <h3 class="confSidebar__item__header__heading">Additional comments</h3>
+      <h3 class="confSidebar__item__header__heading">Extra wensen of opmerkingen (optioneel)</h3>
     </header>
     <form action="">
-    <textarea name="" id="" cols="30" rows="10">
+    <textarea name="commentField" id="commentField" class="confSidebar__item--commentField" cols="30" rows="10">
       Here is a text field
     </textarea>
     </form>
@@ -14,5 +14,8 @@
 </template>
 
 <style scoped>
+.confSidebar__item--commentField{
+    font-family: "Dosis", sans-serif;
+}
 
 </style>

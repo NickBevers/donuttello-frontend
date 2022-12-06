@@ -15,12 +15,12 @@ const test = () => {
     </header>
     <section class="confSidebar__item__section">
       <ul class="confSidebar__item__section--listing">
-        <li class="listing__item">Option 1</li>
-        <li class="listing__item">Option 2</li>
-        <li class="listing__item">Option 3</li>
-        <li class="listing__item">Option 4</li>
-        <li class="listing__item">Option 5</li>
-        <li class="listing__item">Option x</li>
+        <li class="listing__item">Optie 1</li>
+        <li class="listing__item">Optie 2</li>
+        <li class="listing__item">Optie 3</li>
+        <li class="listing__item">Optie 4</li>
+        <li class="listing__item">Optie 5</li>
+        <li class="listing__item">Optie x</li>
       </ul>
     </section>
   </div>

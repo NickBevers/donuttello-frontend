@@ -50,31 +50,31 @@
     --margin-xxxlarge: 5em;
 
 }
+
 body {
     overflow-x: hidden;
     overflow-y: auto !important;
     height: 100vh;
 }
-.confSidebar {
-    width: 30%;
-}
+
 .confSidebar__item {
     background-color: white;
     font-size: 1em;
-    font-family: 'Lato', sans-serif;
     padding-left: 1.5em;
 }
+
 .confSidebar__item__header {
     padding: 1em 0;
     display: flex;
     flex-flow: row;
 }
+
 .confSidebar__item__header__heading {
     font-size: 1.5em;
-    font-family: 'Dosis', sans-serif;;
     font-weight: bold;
     margin: 0;
 }
+
 .confSidebar__item__toggle {
     font-size: 1.5em;
     font-weight: bold;
@@ -85,18 +85,21 @@ body {
     cursor: pointer;
     color: #212529;
 }
+
 .confSidebar__item__section {
     padding: 1em 0;
     background-color: #82D1E4;
     display: flex;
     flex-flow: column;
 }
+
 .confSidebar__item__section--listing {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-flow: wrap;
 }
+
 .listing__item {
     padding: 0;
     margin: 0 1em 1em 0;
@@ -104,6 +107,7 @@ body {
     height: 4em;
     background-color: #C4C03A;
 }
+
 .listing__item__image {
     padding: 0;
     width: 4em;
@@ -111,11 +115,13 @@ body {
     border-radius: 0.5em;
     border: 1px solid var(--grey);
 }
+
 .input__file__label{
     padding: 2em 0;
     border-radius: 0.5em;
     border: 1px dashed #212529;
 }
+
 .input__file {
     display: none;
 }
@@ -123,6 +129,7 @@ body {
 /* Color picker styling (does not work with scoped style tags) */
 .vacp-color-picker > *{
     font-family: 'Dosis', sans-serif;
+    font-size: 1.1em;
     font-weight: 600;
 }
 
