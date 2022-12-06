@@ -1,8 +1,8 @@
 <script setup>
 import DoughType from './SideBar/DoughType.vue';
 import FillingList from './SideBar/FillingList.vue';
-import GlaceColour from './SideBar/GlaceColour.vue';
-import GlaceFlavour from './SideBar/GlaceFlavour.vue';
+import GlaceColour from './SideBar/GlazeColour.vue';
+import GlaceFlavour from './SideBar/GlazeFlavour.vue';
 import Toppings from './SideBar/Toppings.vue';
 import UploadLogo from './SideBar/UploadLogo.vue';
 import LogoShape from './SideBar/LogoShape.vue';
