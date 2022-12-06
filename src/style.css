@@ -52,7 +52,7 @@
 }
 body {
     overflow-x: hidden;
-    overflow-y: scroll!important;
+    /* overflow-y: scroll!important; */
 }
 .confSidebar {
     width: 30%;

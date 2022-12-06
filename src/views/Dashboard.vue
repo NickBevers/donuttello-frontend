@@ -49,6 +49,9 @@
 
     onMounted(() => {
         getDonuts();
+        // remove canvas (no clue why it's here, but it is)
+        let canvas = document.getElementsByTagName('canvas');
+        while (canvas[0]) canvas[0].parentNode.removeChild(canvas[0]);
     })
 </script>
 

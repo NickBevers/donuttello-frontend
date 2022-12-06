@@ -23,6 +23,8 @@ nav{
     margin-left: -0.5rem;
     width: 7.4rem;
     height: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 .navigation__links{
