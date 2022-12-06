@@ -7,7 +7,6 @@
 <template>
     <div class="home">
         <Navigation />
-        <p class="homeText">Home</p>
         <ConfiguratorSidebar />
     </div>
 </template>

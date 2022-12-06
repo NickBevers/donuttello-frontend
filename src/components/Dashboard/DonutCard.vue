@@ -17,6 +17,18 @@
             <p class="donut__card__company">{{ donut.company }}</p>
             <p class="donut__card__name">{{ donut.name }}</p>
         </div>
+
+        <div class="donut__card__mail">
+            <a :href="'mailto:' + donut.email" class="donut__card__mail__link"><font-awesome-icon icon="fa-solid fa-envelope" /></a>
+        </div>
+
+        <!-- <div class="donut__card__actions">
+            <select name="donutActions" id="donutActions" class="filter__input">
+                <option value="hello" selected hidden> ⛭ </option>
+                <option value="edit">Bewerken</option>
+                <option value="delete">Verwijderen</option>
+            </select>
+        </div> -->
     </div>
         
 </template>
@@ -27,6 +39,7 @@
         width: clamp(200px, 16em, 300px);
         border-radius: var(--border-radius);
         box-shadow: 0 0 10px #00000035;
+        position: relative;
     }
 
     .donut__card__image{
@@ -68,5 +81,50 @@
     .donut__card__name{
         color: var(--grey);
         font-size: var(--font-size--small);
+    }
+
+    .donut__card__mail{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 30px;
+        height: 30px;
+        margin-bottom: 0.5em;
+        margin-right: 0.5em;
+    }
+
+    .donut__card__mail__link{
+        color: var(--pink--main);
+        font-size: var(--font-size--large);
+        width: 100%;
+        height: 100%;
+    }
+
+    .filter__input{
+        margin-right: 0.5em;
+        padding: 0.2em 0;
+        border: none;
+        border-radius: 0.5em;
+        background-color: var(--pink--main);
+        color: var(--white);
+        font-size: var(--font-size--small);
+        font-weight: var(--font-weight-semibold);
+        position: absolute;
+        top: 10em;
+        right: 0;
+        width: 50px;
+    }
+
+    .filter__input:focus{
+        outline: none;
+    }
+
+    .filter__input:hover{
+        cursor: pointer;
+    }
+
+    .filter__input option{
+        background-color: var(--pink--main);
+        color: var(--white);
     }
 </style>

@@ -6,6 +6,7 @@ const color = ref('#000000');
 
 function updateColor (e) {
   color.value = e.cssColor;
+  console.log(color.value);
 }
 </script>
 <template>
@@ -14,11 +15,12 @@ function updateColor (e) {
       <h3 class="confSidebar__item__header__heading">Glace colour picker</h3>
     </header>
     <div class="colorpicker__container">
-      <ColorPicker :color="color" :visible-formats="['hex']" @color-change="updateColor"/>
+      <ColorPicker :color="color" :visible-formats="['hex', 'rgb']" alpha-channel="hide" default-format="rgb" @color-change="updateColor"/>
     </div>
   </div>
 </template>
 
 <style scoped>
+    
 
 </style>

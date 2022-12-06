@@ -1,7 +1,7 @@
 @import "./typography";
 @import "./colors";
 
-.form__container--login{
+.form__container--login, .form__container--reset{
     width: clamp(30%, 60%, 900px);
     height: calc(100vh - 5.7rem);
     margin: 0 auto;

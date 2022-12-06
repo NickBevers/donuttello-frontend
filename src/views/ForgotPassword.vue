@@ -47,8 +47,8 @@
     <div class="resetpw__container">
         <Navigation />
 
-        <div class="form__container--login">
-            <h3>Meld je hier aan</h3>
+        <div class="form__container--reset">
+            <h3>Paswoord vergeten?</h3>
             <ResetForm />
         </div>
     </div>
