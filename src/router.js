@@ -4,6 +4,7 @@ import Configurator from './views/Configurator.vue'
 import Dashboard from './views/Dashboard.vue'
 import Login from './views/Login.vue'
 import ForgotPassword from './views/ForgotPassword.vue'
+import Detail from './views/Detail.vue'
 
 export default createRouter({
     history: createWebHistory(),
@@ -32,6 +33,11 @@ export default createRouter({
             path: '/forgot-password',
             name: 'ForgotPassword',
             component: ForgotPassword,
+        },
+        {
+            path: '/detail/:id',
+            name: 'Detail',
+            component: Detail,
         },
         {
             path: '/:pathMatch(.*)*',
