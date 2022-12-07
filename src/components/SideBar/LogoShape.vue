@@ -1,5 +1,41 @@
 <script setup>
 import{ref} from "vue";
+const shapes = ref([
+    {
+    name: "Vierkant",
+    checked: false
+    },
+    {
+    name: "Cirkelvormig",
+    checked: false
+    },
+    {
+    name: "Rechthoekig",
+    checked: false
+    },
+    {
+    name: "Ovaal",
+    checked: false
+    }
+]);
+
+const checked = ref(false);
+
+const select = ref(false);
+function selectTopping(shapes) {
+
+  const listItems = document.querySelector(".confSidebar__item__section--listing").children;
+  for (let i = 0; i < listItems.length; i++) {
+    listItems[i].classList.remove("active");
+  }
+
+  console.log(shapes.name);
+
+  shapes.checked = !shapes.checked;
+  console.log(shapes.checked);
+
+}
+
 </script>
 <template>
   <div class="confSidebar__item">
@@ -9,10 +45,9 @@ import{ref} from "vue";
     </header>
     <section class="confSidebar__item__section">
       <ul class="confSidebar__item__section--listing">
-        <li class="listing__item">Vierkant</li>
-        <li class="listing__item">Rechthoekig</li>
-        <li class="listing__item">Cirkelvormig</li>
-        <li class="listing__item">Ovaal</li>
+        <li v-for="shapes in shapes" :class="{active: shapes.checked}" class="listing__item" :key="shapes.name" @click="selectTopping(shapes)">
+          {{shapes.name}}
+        </li>
       </ul>
     </section>
   </div>
