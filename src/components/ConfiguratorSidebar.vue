@@ -1,9 +1,7 @@
 <script setup>
     import { ref } from 'vue'
-    import DoughType from './SideBar/DoughType.vue';
     import FillingList from './SideBar/FillingList.vue';
     import GlazeColour from './SideBar/GlazeColour.vue';
-    import GlazeFlavour from './SideBar/GlazeFlavour.vue';
     import Toppings from './SideBar/Toppings.vue';
     import UploadLogo from './SideBar/UploadLogo.vue';
     import LogoShape from './SideBar/LogoShape.vue';
@@ -12,10 +10,8 @@
 
 <template>
     <div class="confSidebar">
-        <DoughType />
         <FillingList />
         <GlazeColour />
-        <GlazeFlavour />
         <Toppings />
         <UploadLogo />
         <LogoShape />
