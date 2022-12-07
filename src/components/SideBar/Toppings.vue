@@ -37,6 +37,11 @@ const toppings = ref([
 ]);
 
 const checked = ref(false);
+
+const select = ref(false);
+function selectTopping(toppings) {
+  console.log(toppings);
+}
 </script>
 <template>
   <div class="confSidebar__item">
@@ -48,7 +53,7 @@ const checked = ref(false);
     <section v-if="toggle" class="confSidebar__item__section">
       <ul class="confSidebar__item__section--listing">
 
-        <li v-for="toppings in toppings" class="listing__item">
+        <li v-for="toppings in toppings" class="listing__item" :key="toppings.name" @click="selectTopping(toppings.name)">
             {{toppings.name}}
         </li>
 
