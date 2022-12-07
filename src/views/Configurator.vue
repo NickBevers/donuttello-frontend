@@ -1,17 +1,35 @@
 <script setup>
     import Navigation from '../components/Navigation.vue';
     import ConfiguratorSidebar from '../components/ConfiguratorSidebar.vue';
+    import DonutCanvas from '../components/DonutCanvas.vue';
 
 </script>
 
 <template>
     <div class="home">
         <Navigation />
-        <p class="homeText">Home</p>
-        <ConfiguratorSidebar />
+        <div class="configurator__container">
+            <ConfiguratorSidebar />
+            <div class="configurator__canvas">
+                <DonutCanvas />
+            </div>
+        </div>
     </div>
 </template>
 
 <style scoped>
+    .configurator__container {
+        display: flex;
+        flex-direction: row;
+        justify-content: baseline;
+        align-items: flex-start;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+    }
 
+    .configurator__canvas{
+        width: 72vw;
+        height: 100vh;
+    }
 </style>

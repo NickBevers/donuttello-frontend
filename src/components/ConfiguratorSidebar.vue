@@ -4,7 +4,6 @@
 </script>
 
 <template>
-    <p>hey this works</p>
     <SidebarItem />
 </template>
 

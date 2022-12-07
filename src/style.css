@@ -55,7 +55,8 @@ body {
     /* overflow-y: scroll!important; */
 }
 .confSidebar {
-    width: 30%;
+    width: 25vw;
+    min-width: 25vw;
     padding: 2em;
 }
 .confSidebar__item {

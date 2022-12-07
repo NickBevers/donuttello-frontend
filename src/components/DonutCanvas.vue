@@ -7,25 +7,28 @@
     import donutModel from "../assets/models/compressed/dough.glb";
     import glazeModel from "../assets/models/compressed/glaze.glb";
     import donutLogo from "../assets/images/donuttello-logo.png";
-    const height = window.innerHeight - 100;
-    const sizes = { width: window.innerWidth, height: height }
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color( 0xCAE3E8 );
-    const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.01, 1000 );
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    const controls = new OrbitControls( camera, renderer.domElement );
+    
+    
     const loader = new GLTFLoader();
     const dracoLoader = new DRACOLoader();
     
     const props = defineProps({
         donutData: {
             type: Object,
-            required: true
+            required: false
         }
     })
     const donut = props.donutData;
 
     onMounted(() => {
+        const domElement = document.querySelector(".configurator__canvas");
+        console.log(domElement);
+        const sizes = { width: domElement.offsetWidth, height: domElement.offsetHeight - 92 }
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color( 0xCAE3E8 );
+        const camera = new THREE.PerspectiveCamera( 50, domElement.offsetWidth / domElement.offsetHeight, 0.01, 1000 );
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        const controls = new OrbitControls( camera, renderer.domElement );
         dracoLoader.setDecoderConfig({ type: 'js' });
         // dracoLoader.setDecoderPath( 'https://www.gstatic.com/draco/v1/decoders/' );
         dracoLoader.setDecoderPath( '/node_modules/three/examples/js/libs/draco/' );
@@ -117,7 +120,7 @@
         renderer.setPixelRatio( Math.min(window.devicePixelRatio, 2) );
         renderer.shadowMap.enabled = true;
         renderer.gammaOutput = true;
-        document.body.appendChild( renderer.domElement );
+        document.querySelector(".configurator__canvas").appendChild( renderer.domElement );
         renderer.render( scene, camera );
 
 
