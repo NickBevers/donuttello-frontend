@@ -1,8 +1,44 @@
 <script setup>
 import{ref} from "vue";
 
+const toppings = ref([
+  {
+    name: "Optie 1",
+    checked: false
+  },
+  {
+    name: "Optie 2",
+    checked: false
+  },
+  {
+    name: "Optie 3",
+    checked: false
+  },
+  {
+    name: "Optie 4",
+    checked: false
+  },
+  {
+    name: "Optie 5",
+    checked: false
+  },
+  {
+    name: "Optie 6",
+    checked: false
+  },
+  {
+    name: "Optie 7",
+    checked: false
+  },
+  {
+    name: "Optie x",
+    checked: false
+  }
+]);
+
 const checked = ref(false);
 const test = () => {
+  checked.value = !checked.value;
   console.log(checked.value);
 }
 </script>
@@ -15,12 +51,11 @@ const test = () => {
     </header>
     <section class="confSidebar__item__section">
       <ul class="confSidebar__item__section--listing">
-        <li class="listing__item">Optie 1</li>
-        <li class="listing__item">Optie 2</li>
-        <li class="listing__item">Optie 3</li>
-        <li class="listing__item">Optie 4</li>
-        <li class="listing__item">Optie 5</li>
-        <li class="listing__item">Optie x</li>
+
+        <li v-for="toppings in toppings" class="listing__item">
+            {{toppings.name}}
+        </li>
+
       </ul>
     </section>
   </div>
