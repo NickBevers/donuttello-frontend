@@ -119,7 +119,8 @@ body {
 }
 
 .input__file__label{
-    padding: 2em 0;
+    padding: 2em 1em;
+    cursor: pointer;
     border-radius: 0.5em;
     border: 1px dashed #212529;
 }
