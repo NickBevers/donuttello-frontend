@@ -42,7 +42,6 @@ const select = ref(false);
 function selectTopping(toppings) {
 
   const listItems = document.querySelector(".confSidebar__item__section--listing").children;
-  console.log(listItems.length);
   for (let i = 0; i < listItems.length; i++) {
       listItems[i].classList.remove("active");
   }
