@@ -40,9 +40,18 @@ const checked = ref(false);
 
 const select = ref(false);
 function selectTopping(toppings) {
+
+  const listItems = document.querySelector(".confSidebar__item__section--listing").children;
+  console.log(listItems.length);
+  for (let i = 0; i < listItems.length; i++) {
+      listItems[i].classList.remove("active");
+  }
+
   console.log(toppings.name);
+
   toppings.checked = !toppings.checked;
   console.log(toppings.checked);
+
 }
 </script>
 <template>
@@ -55,7 +64,7 @@ function selectTopping(toppings) {
     <section v-if="toggle" class="confSidebar__item__section">
       <ul class="confSidebar__item__section--listing">
 
-        <li v-for="toppings in toppings" class="listing__item" :key="toppings.name" @click="selectTopping(toppings)">
+        <li v-for="toppings in toppings" :class="{active: toppings.checked}" class="listing__item" :key="toppings.name" @click="selectTopping(toppings)">
             {{toppings.name}}
         </li>
 
@@ -65,5 +74,7 @@ function selectTopping(toppings) {
 </template>
 
 <style scoped>
-
+.active {
+  background-color: #f2f2f2;
+}
 </style>
