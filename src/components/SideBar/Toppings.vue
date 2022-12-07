@@ -45,7 +45,7 @@ const checked = ref(false);
       <input type="checkbox" id="checkbox" v-model="checked" @click="toggle = !toggle"/>
 
     </header>
-    <section v-if="!toggle" class="confSidebar__item__section">
+    <section v-if="toggle" class="confSidebar__item__section">
       <ul class="confSidebar__item__section--listing">
 
         <li v-for="toppings in toppings" class="listing__item">
