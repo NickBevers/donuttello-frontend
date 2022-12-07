@@ -54,5 +54,11 @@ function selectTopping(shapes) {
 </template>
 
 <style scoped>
-
+.active {
+  color: #212529;
+  background-color: #ffb0b3;
+  opacity: 1;
+  border: 1px solid rgb(211, 207, 207);
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.25));
+}
 </style>
