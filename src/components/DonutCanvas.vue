@@ -39,7 +39,8 @@
             new THREE.MeshBasicMaterial({ color: 0xffffff }),
             new THREE.MeshBasicMaterial({ color: 0xffffff }),
             new THREE.MeshBasicMaterial({ color: 0xffffff }),
-            new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(donutLogo) }),
+            new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( donutLogo ), transparent: true, opacity: 1, }),
+            // new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(donutLogo) }),
             new THREE.MeshBasicMaterial({ color: 0xffffff }),
         ];
 
