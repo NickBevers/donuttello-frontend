@@ -1,6 +1,54 @@
 <script setup>
 import { ref } from 'vue'
 const checked = ref(false);
+const fillings = ref([
+  {
+    name: "Optie 1",
+    checked: false
+  },
+  {
+    name: "Optie 2",
+    checked: false
+  },
+  {
+    name: "Optie 3",
+    checked: false
+  },
+  {
+    name: "Optie 4",
+    checked: false
+  },
+  {
+    name: "Optie 5",
+    checked: false
+  },
+  {
+    name: "Optie 6",
+    checked: false
+  },
+  {
+    name: "Optie 7",
+    checked: false
+  },
+  {
+    name: "Optie x",
+    checked: false
+  }
+]);
+const select = ref(false);
+function selectTopping(fillings) {
+
+  const listItems = document.querySelector(".confSidebar__item__section--listing").children;
+  for (let i = 0; i < listItems.length; i++) {
+    listItems[i].classList.remove("active");
+  }
+
+  console.log(fillings.name);
+
+  fillings.checked = !fillings.checked;
+  console.log(fillings.checked);
+
+}
 </script>
 <template>
   <div class="confSidebar__item">
@@ -11,12 +59,9 @@ const checked = ref(false);
     </header>
     <section v-if="toggle" class="confSidebar__item__section">
       <ul class="confSidebar__item__section--listing">
-        <li class="listing__item">Optie 1</li>
-        <li class="listing__item">Optie 2</li>
-        <li class="listing__item">Optie 3</li>
-        <li class="listing__item">Optie 4</li>
-        <li class="listing__item">Optie 5</li>
-        <li class="listing__item">Optie x</li>
+        <li v-for="fillings in fillings" :class="{active: fillings.checked}" class="listing__item" :key="fillings.name" @click="selectTopping(fillings)">
+          {{fillings.name}}
+        </li>
       </ul>
     </section>
   </div>
