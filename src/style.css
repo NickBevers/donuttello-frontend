@@ -107,7 +107,10 @@ body {
     margin: 0 1em 1em 0;
     width: 4em;
     height: 4em;
+    opacity: 0.5;
     background-color: #C4C03A;
+    border-radius: 0.25rem;
+    border: 1px solid rgb(220, 220, 220);
 }
 
 .listing__item__image {
