@@ -12,10 +12,10 @@
 
 <template>
     <div class="confSidebar">
-        <!-- <DoughType /> -->
+        <DoughType />
         <FillingList />
         <GlazeColour />
-        <!-- <GlazeFlavour /> -->
+        <GlazeFlavour />
         <Toppings />
         <UploadLogo />
         <LogoShape />
