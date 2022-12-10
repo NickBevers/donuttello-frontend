@@ -1,6 +1,5 @@
 <script setup>
     import { ref } from 'vue';
-    import { login } from '../assets/functions/login';
   
     const email = ref('');
     const passwordOld = ref('');
@@ -78,7 +77,7 @@
             </div>
 
             <div class="form__item form__item--forgot">
-                <a href="/login">go back</a>
+                <a href="/home">go back</a>
             </div>
 
             <div class="form__item form__item--reset">
