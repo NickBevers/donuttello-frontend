@@ -1,12 +1,14 @@
 <script setup>
 import { ref } from 'vue'
 import { ColorPicker } from 'vue-accessible-color-picker';
+import { useDonutStore } from "../../stores/donutConf.js";
 
+const donutStore = useDonutStore();
 const color = ref('#000000');
 
 function updateColor (e) {
   color.value = e.cssColor;
-  console.log(color.value);
+  donutStore.setGlazeColor(color.value);
 }
 </script>
 <template>
