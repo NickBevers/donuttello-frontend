@@ -62,9 +62,9 @@
                 </div>
             </div>
 
-            <div class="form__item form__item--forgot">
+            <!-- <div class="form__item form__item--forgot">
                 <a href="/forgot-password">Paswoord vergeten?</a>
-            </div>
+            </div> -->
 
             <div class="form__item form__item--submit">
                 <button type="submit">Inloggen</button>
