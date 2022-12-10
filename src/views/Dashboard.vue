@@ -33,7 +33,7 @@
         fetch(`https://donuttello-backend.onrender.com/api/v1/donuts?filter=${filter.value}`, {
             method: "GET",
             headers: {
-                "Access-Control-Allow-Origin": "*",
+                // "Access-Control-Allow-Origin": "*",
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${jwtToken.value}`
             }
