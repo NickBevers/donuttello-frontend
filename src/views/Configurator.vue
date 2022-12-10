@@ -7,10 +7,28 @@
 <template>
     <div class="home">
         <Navigation />
-        <ConfiguratorSidebar />
+        <div class="configurator__container">
+            <ConfiguratorSidebar />
+            <div class="configurator__canvas">
+                <DonutCanvas />
+            </div>
+        </div>
     </div>
 </template>
 
 <style scoped>
+    .configurator__container {
+        display: flex;
+        flex-direction: row;
+        justify-content: baseline;
+        align-items: flex-start;
+        width: 100vw;
+        height: calc(100vh-5.7em);
+        overflow: hidden;
+    }
 
+    .configurator__canvas{
+        width: 72vw;
+        height: 100%;
+    }
 </style>
