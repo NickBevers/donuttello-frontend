@@ -50,6 +50,10 @@
 
     onMounted(() => {
         getDonuts();
+        
+        // remove all canvas elements
+        let canvas = document.getElementsByTagName('canvas');
+        while (canvas[0]) canvas[0].parentNode.removeChild(canvas[0]);
     })
 </script>
 
@@ -77,7 +81,7 @@
 
                 <div class="donut__card__container">
                     <div v-for="donut in donuts" :key="donut._id" class="donut__card">
-                        <DonutCard :donut="donut" />
+                        <a :href="'/detail/' + donut._id" ><DonutCard :donut="donut" /></a>
                     </div>
                 </div>
             </div>
