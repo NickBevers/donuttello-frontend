@@ -2,7 +2,7 @@
     import { ref } from 'vue';
     import { login } from '../assets/functions/login';
   
-    const email = ref('');
+    const username = ref('');
     const password = ref('');
     const showPassword = ref(false);
     const loginErrorStatus = ref(null);
@@ -18,14 +18,13 @@
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ "email": email.value , "password": password.value }),
+            body: JSON.stringify({ "username": username.value , "password": password.value }),
         })
         .then((response) => response.json())
         .then((data) => {
             if (data.status === "success") {
-                console.log(data);
                 localStorage.setItem("jwtToken", data.token);
-                email.value = "";
+                username.value = "";
                 password.value = "";
                 showPassword.value = false;
                 location.href = "/dashboard";
@@ -49,8 +48,8 @@
         </div>
         <form @submit.prevent="loginSubmit">
             <div class="form__item">
-                <label for="email">E-mailadres</label>
-                <input type="email" id="email" name="email" placeholder="Email" v-model="email"/>
+                <label for="email">Gebruikersnaam</label>
+                <input type="text" id="username" name="username" placeholder="Gebruikersnaam" v-model="username"/>
             </div>
             <div class="form__item">
                 <label for="password">Paswoord</label>
