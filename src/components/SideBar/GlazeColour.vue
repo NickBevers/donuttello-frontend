@@ -15,7 +15,7 @@ function updateColor (e) {
       <h3 class="confSidebar__item__header__heading">Kleur van de glazuur</h3>
     </header>
     <div class="colorpicker__container">
-      <ColorPicker :color="color" :visible-formats="['hex', 'rgb']" alpha-channel="hide" default-format="rgb" @color-change="updateColor"/>
+      <ColorPicker :color="color" :visible-formats="['hex']" alpha-channel="hide" default-format="hex" @color-change="updateColor"/>
     </div>
   </div>
 </template>
