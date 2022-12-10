@@ -1,6 +1,7 @@
 <script setup>
     import Navigation from '../components/Navigation.vue';
     import ConfiguratorSidebar from '../components/ConfiguratorSidebar.vue';
+    import DonutCanvas from '../components/DonutCanvas.vue';
 
 </script>
 
