@@ -1,14 +1,32 @@
 <script setup>
-    import { defineProps, onMounted } from 'vue'
-    import * as THREE from 'three'
-    import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-    import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-    import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
+    import { watch, ref, defineProps, onMounted } from 'vue';
+    import * as THREE from 'three';
+    import { useDonutStore } from "../stores/donutConf.js";
+    import {storeToRefs} from "pinia";
+    import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+    import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+    import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
     import donutModel from "../assets/models/compressed/dough.glb";
     import glazeModel from "../assets/models/compressed/glaze.glb";
     import donutLogo from "../assets/images/donuttello-logo.png";
-    
-    
+    const donutStore = useDonutStore();
+    const { glazeColor, extraWishes } = storeToRefs(donutStore);
+    const color = ref("");
+    watch(
+        glazeColor,
+        (newVal) => {
+          color.value = newVal;
+          console.log(color.value);
+        },
+    );
+    const text = ref("");
+    watch(
+        extraWishes,
+        (newVal) => {
+          text.value = newVal;
+          console.log(text.value);
+        },
+    );
     const loader = new GLTFLoader();
     const dracoLoader = new DRACOLoader();
     
