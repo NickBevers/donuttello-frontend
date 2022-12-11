@@ -1,9 +1,10 @@
 <script setup>
 import{ref} from "vue";
+import { useDonutStore } from "../../stores/donutConf.js";
 
 const toppings = ref([
   {
-    name: "Optie 1",
+    name: "Bounty",
     checked: false
   },
   {
@@ -47,6 +48,7 @@ function selectTopping(toppings) {
   }
 
   console.log(toppings.name);
+  donutStore.setToppings(toppings.name);
 
   toppings.checked = !toppings.checked;
   console.log(toppings.checked);
