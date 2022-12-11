@@ -23,7 +23,7 @@
             console.log(donut.data);
         } else {
             console.log("something went wrong, please try again");
-            console.log(data); 
+            console.log(data);
         }
     });
 
@@ -35,7 +35,7 @@
         <Navigation />
 
         <div class="configurator__container">
-            <DetailSidebar />
+            <DetailSidebar :donut="donut.data" />
             <div class="configurator__canvas donut__detail__canvas">
                 <DonutCanvas />
             </div>
