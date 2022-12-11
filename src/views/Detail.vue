@@ -2,7 +2,7 @@
 
     import { reactive, computed } from 'vue'
     import Navigation from '../components/Navigation.vue';
-    import DonutCanvas from '../components/DonutCanvas.vue';
+    import DetailCanvas from '../components/DetailCanvas.vue';
     import DetailSidebar from '../components/DetailSidebar.vue';
     const donutId = window.location.href.split('/').pop();
 
@@ -37,7 +37,7 @@
         <div class="configurator__container">
             <DetailSidebar :donut="donut.data" />
             <div class="configurator__canvas donut__detail__canvas">
-                <DonutCanvas />
+                <DetailCanvas :donut="donut.data" />
             </div>
         </div>
     </div>
