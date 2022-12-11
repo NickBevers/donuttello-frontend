@@ -9,6 +9,7 @@
     import donutModel from "../assets/models/compressed/dough.glb";
     import glazeModel from "../assets/models/compressed/glaze.glb";
     import donutLogo from "../assets/images/donuttello-logo.png";
+    import bounty from "../assets/models/compressed/bounty.glb";
     const donutStore = useDonutStore();
     const { glazeColor, extraWishes } = storeToRefs(donutStore);
     const color = ref("");
