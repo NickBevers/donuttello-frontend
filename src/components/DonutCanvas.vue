@@ -41,7 +41,7 @@
     onMounted(() => {
         const domElement = document.querySelector(".configurator__canvas");
         console.log(domElement);
-        const sizes = { width: domElement.offsetWidth, height: domElement.offsetHeight - 92 }
+        const sizes = { width: domElement.offsetWidth, height: domElement.offsetHeight }
         const scene = new THREE.Scene();
         scene.background = new THREE.Color( 0xCAE3E8 );
         const camera = new THREE.PerspectiveCamera( 50, domElement.offsetWidth / domElement.offsetHeight, 0.01, 1000 );
@@ -142,7 +142,14 @@
         document.querySelector(".configurator__canvas").appendChild( renderer.domElement );
         renderer.render( scene, camera );
 
+        
+        const updateColor = () => {
+            scene.traverse( ( child ) => {
+                if ( child.name === "glaze" ) { child.material.color.set(color.value) }
+            });
+        }
 
+        
         // Animating the scene
         const animate = () => {
             requestAnimationFrame( animate );
@@ -154,6 +161,7 @@
         loadDonut();
         loadGlaze();
         animate();
+
     })
 
 

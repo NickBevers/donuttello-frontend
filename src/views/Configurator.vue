@@ -24,12 +24,12 @@
         justify-content: baseline;
         align-items: flex-start;
         width: 100vw;
-        height: calc(100vh-5.7em);
+        height: calc(100vh - 5.7em);
         overflow: hidden;
     }
 
     .configurator__canvas{
         width: 72vw;
-        height: 100%;
+        height: calc(100vh - 5.7em);
     }
 </style>

@@ -4,7 +4,7 @@
     const jwtToken = ref(localStorage.getItem('jwtToken'));
     
     if(jwtToken.value){
-        fetch(`http://localhost:3000/api/v1/users/auth`, {
+        fetch(`https://donuttello-backend.onrender.com/api/v1/users/auth`, {
             method: "GET",
             headers: {
                 "Access-Control-Allow-Origin": "*",
