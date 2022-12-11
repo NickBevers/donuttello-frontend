@@ -5,6 +5,7 @@ export const useDonutStore = defineStore({
     state: () => ({
         glazeColor: "#000",
         toppings: '',
+        sprinkles: '',
         logoShape: '',
         extraWishes: '',
     }),
