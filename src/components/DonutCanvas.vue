@@ -283,7 +283,34 @@ onMounted(() => {
         });
     }
 
+    // change topping object
+    const updateTopping = () => {
+        // when updateing the first time oldTopping is empty, so we need to check if it is empty
+        if (oldTopping !== "") {
+            // get index from topingArray by name
+            const index = toppingArray.findIndex((item) => item.name === oldTopping);
 
+            // Hide the topping that is currently visible
+            toppingArray[index].variable.visible = false;
+        }
+
+        // get index from topingArray by name
+        const newIndex = toppingArray.findIndex((item) => item.name === topping.value);
+        console.log(newIndex);
+        console.log(toppingArray[newIndex]);
+
+        // Show the new topping
+        toppingArray[newIndex].variable.visible = true;
+    }
+
+    // load toppings
+    const loadToppings = () => {
+        let modelToLoad;
+        toppingArray.forEach((item) => {
+            modelToLoad = item.model;
+            loadModel([0, 0, 0], [1, 1, 1], modelToLoad, item);
+        });
+    }
 
     // Animating the scene
     const animate = () => {
@@ -295,6 +322,7 @@ onMounted(() => {
     // Calling the functions
     loadDonut();
     loadGlaze();
+    loadToppings();
     animate();
     // update glaze color
     watch(color, updateColor);
