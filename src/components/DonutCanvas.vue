@@ -151,12 +151,11 @@ const donut = props.donutData;
 
 onMounted(() => {
     const domElement = document.querySelector(".configurator__canvas");
-    console.log(domElement);
     const sizes = { width: domElement.offsetWidth, height: domElement.offsetHeight }
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xCAE3E8);
     const camera = new THREE.PerspectiveCamera(50, domElement.offsetWidth / domElement.offsetHeight, 0.01, 1000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
     const controls = new OrbitControls(camera, renderer.domElement);
     dracoLoader.setDecoderConfig({ type: 'js' });
     // dracoLoader.setDecoderPath( 'https://www.gstatic.com/draco/v1/decoders/' );
@@ -164,15 +163,23 @@ onMounted(() => {
     loader.setDRACOLoader(dracoLoader);
 
     const logoTexture = [
-        new THREE.MeshBasicMaterial({ color: 0xffffff }),
-        new THREE.MeshBasicMaterial({ color: 0xffffff }),
-        new THREE.MeshBasicMaterial({ color: 0xffffff }),
-        new THREE.MeshBasicMaterial({ color: 0xffffff }),
+        new THREE.MeshBasicMaterial({ color: 0xf5f5f5 }),
+        new THREE.MeshBasicMaterial({ color: 0xf5f5f5 }),
+        new THREE.MeshBasicMaterial({ color: 0xf5f5f5 }),
         // new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( donutLogo ), transparent: true, opacity: 1, }),
-        new THREE.MeshBasicMaterial({ color: 0xffffff }),
-        new THREE.MeshBasicMaterial({ color: 0xffffff }),
+        new THREE.MeshBasicMaterial({ color: 0xf5f5f5 }),
+        // ↓ FRONT OF THE BOX ↓
+        new THREE.MeshBasicMaterial({ color: 0xf5f5f5 }),
+        new THREE.MeshBasicMaterial({ color: 0xf5f5f5 }),
     ];
 
+    // Load the donut logo
+    const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
+    const cube = new THREE.Mesh(cubeGeometry, logoTexture);
+    cube.position.set(-0.02, 0.038, -0.04);
+    cube.rotation.set(1.9, 3, 3.5);
+    cube.scale.set(0.05, 0.03, 0.001);
+    scene.add(cube);
 
     //load only the donut model
     const loadDonut = (position = [0, 0, 0], scale = [1, 1, 1], colors = false) => {
@@ -196,14 +203,6 @@ onMounted(() => {
                 console.error(error);
             }
         );
-
-        // Load the donut logo
-        const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
-        const cube = new THREE.Mesh(cubeGeometry, logoTexture);
-        cube.position.set(0, 0.05, -0.045);
-        cube.rotation.set(2.007, 3.14, 3.14);
-        cube.scale.set(0.05, 0.03, 0.001);
-        scene.add(cube);
     }
 
     // Load only the glaze model
@@ -233,15 +232,22 @@ onMounted(() => {
         );
     }
     // load all topping dynamically
-    const loadModel = (position = [0, 0, 0], scale = [1, 1, 1], model, arrayItem) => {
+    const loadModel = (position = [0, 0, 0], rotation = [0, 0, 0], scale = [1, 1, 1], model, arrayItem) => {
         loader.load(
             model,
 
             (gltf) => {
                 arrayItem.variable = gltf.scene;
+                // console.log(arrayItem.variable);
                 arrayItem.variable.visible = false;
+                arrayItem.variable.receiveShadow = false;
+                if(arrayItem.variable.children[0].name === "leoo"){
+                    arrayItem.variable.children[0].name = "leo";
+                    arrayItem.variable.children[0].material.color.set(0xad6642);
+                }
                 arrayItem.variable.scale.set(...scale);
                 arrayItem.variable.position.set(...position);
+                arrayItem.variable.rotation.set(...rotation);
                 scene.add(arrayItem.variable);
             },
 
@@ -257,8 +263,9 @@ onMounted(() => {
     }
 
     // Setting up the lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-    ambientLight.position.set(2, 2, 5);
+    const ambientLight = new THREE.AmbientLight(0xffffff,  1.1);
+    ambientLight.name = "ambientLight";
+    // ambientLight.position.set(0, 10, 0);
     scene.add(ambientLight);
 
 
@@ -308,7 +315,7 @@ onMounted(() => {
         let modelToLoad;
         toppingArray.forEach((item) => {
             modelToLoad = item.model;
-            loadModel([0, 0, 0], [1, 1, 1], modelToLoad, item);
+            loadModel([0, 0, 0], [0, 0, 0], [1, 1, 1], modelToLoad, item);
         });
     }
 
