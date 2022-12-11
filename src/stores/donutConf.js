@@ -32,6 +32,9 @@ export const useDonutStore = defineStore({
         setToppings(toppings) {
             this.toppings = toppings;
         },
+        setSprinkles(sprinkles) {
+            this.sprinkles = sprinkles;
+        },
         setLogoShape(logoShape) {
             this.logoShape = logoShape;
         },
