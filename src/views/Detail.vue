@@ -3,6 +3,7 @@
     import { reactive, computed } from 'vue'
     import Navigation from '../components/Navigation.vue';
     import DonutCanvas from '../components/DonutCanvas.vue';
+    import DetailSidebar from '../components/DetailSidebar.vue';
     const donutId = window.location.href.split('/').pop();
 
     let donut = reactive({ data: {} });
@@ -33,20 +34,30 @@
     <div class="donut__detail">
         <Navigation />
 
-        <div class="donut__detail__container configurator__canvas">
-            <DonutCanvas :donutData=donut.data />
+        <div class="configurator__container">
+            <DetailSidebar />
+            <div class="configurator__canvas donut__detail__canvas">
+                <DonutCanvas />
+            </div>
         </div>
     </div>
 </template>
 
 <style scoped>
-.configurator__canvas {
-    width: 100%;
-    height: calc(100vh - 5.7em);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #cae3e8;
-}
+
+    .configurator__container {
+        display: flex;
+        flex-direction: row;
+        justify-content: baseline;
+        align-items: flex-start;
+        width: 100vw;
+        height: calc(100vh - 5.7em);
+        overflow: hidden;
+    }
+
+    .configurator__canvas{
+        width: 82vw;
+        height: calc(100vh - 5.7em);
+    }
 
 </style>
