@@ -11,13 +11,19 @@
     import donutLogo from "../assets/images/donuttello-logo.png";
     import bounty from "../assets/models/compressed/bounty.glb";
     const donutStore = useDonutStore();
-    const { glazeColor, extraWishes } = storeToRefs(donutStore);
+    const { glazeColor, extraWishes, toppings } = storeToRefs(donutStore);
     const color = ref("");
     watch(
         glazeColor,
         (newVal) => {
           color.value = newVal;
           console.log(color.value);
+        },
+    );
+    watch(
+        toppings,
+        (newVal) => {
+          console.log(newVal);
         },
     );
     const text = ref("");

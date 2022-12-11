@@ -2,6 +2,8 @@
 import{ref} from "vue";
 import { useDonutStore } from "../../stores/donutConf.js";
 
+const donutStore = useDonutStore();
+
 const toppings = ref([
   {
     name: "Bounty",
@@ -46,12 +48,12 @@ function selectTopping(toppings) {
   for (let i = 0; i < listItems.length; i++) {
       listItems[i].classList.remove("active");
   }
-
-  console.log(toppings.name);
-  donutStore.setToppings(toppings.name);
+  const topping = toppings.name;
+  //console.log(toppings.name);
+  donutStore.setToppings(topping);
 
   toppings.checked = !toppings.checked;
-  console.log(toppings.checked);
+  //console.log(toppings.checked);
 
 }
 </script>
