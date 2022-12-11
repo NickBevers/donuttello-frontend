@@ -95,6 +95,29 @@
             cube.scale.set(0.05, 0.03, 0.001);
             scene.add( cube );
         }
+        //loading the bounty model and addit it to the scene
+        const loadBounty = (position = [0, 0, 0], scale = [1, 1, 1], colors = false) => {
+            // Load the bounty model
+            loader.load(
+                bounty,
+
+                ( gltf ) => {
+                    const root = gltf.scene;
+                    root.scale.set(...scale);
+                    root.position.set(...position);
+                    scene.add( root );
+                },
+
+                ( xhr ) => {
+                    console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+                },
+
+                ( error ) => {
+                    console.log( 'An error happened' );
+                    console.error( error );
+                }
+            );
+        }
 
         const loadGlaze = (position = [0, 0, 0], scale = [1, 1, 1], colors = false) => {
             // Load the glaze model
@@ -160,6 +183,7 @@
 
         // Calling the functions
         loadDonut();
+        loadBounty();
         loadGlaze();
         animate();
         // update glaze color
