@@ -161,6 +161,8 @@
         loadDonut();
         loadGlaze();
         animate();
+        // update glaze color
+        watch(color, updateColor);
 
     })
 
