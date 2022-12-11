@@ -9,10 +9,31 @@
     import donutModel from "../assets/models/compressed/dough.glb";
     import glazeModel from "../assets/models/compressed/glaze.glb";
     import donutLogo from "../assets/images/donuttello-logo.png";
-    import bounty from "../assets/models/compressed/bounty.glb";
+    import bountyModel from "../assets/models/compressed/bounty.glb";
+    import brownieModel from "../assets/models/compressed/brownie.glb";
+    import caramelModel from "../assets/models/compressed/caramel.glb";
+    import chocolateOrbsModel from "../assets/models/compressed/chocolateOrbs.glb";
+    import coconutModel from "../assets/models/compressed/coconut.glb";
+    import coffeeBeanModel from "../assets/models/compressed/coffeeBean.glb";
+    import glazeLinesModel from "../assets/models/glazeLines.glb";
+    import leoModel from "../assets/models/compressed/leo.glb";
+    import maltesersModel from "../assets/models/compressed/maltesers.glb";
+    import marshmallowModel from "../assets/models/compressed/marshmallow.glb";
+    import oreoModel from "../assets/models/compressed/oreo.glb";
+    import nutsModel from "../assets/models/compressed/nuts.glb";
+    import orangePeelModel from "../assets/models/compressed/orangePeel.glb";
+    import pistachioModel from "../assets/models/compressed/pistachio.glb";
+    import twixModel from "../assets/models/compressed/twix.glb";
+    
+    
+    const loader = new GLTFLoader();
+    const dracoLoader = new DRACOLoader();
     const donutStore = useDonutStore();
     const { glazeColor, extraWishes, toppings } = storeToRefs(donutStore);
     const color = ref("");
+   
+
+    // update the glaze color when changed in the color picker
     watch(
         glazeColor,
         (newVal) => {
@@ -20,13 +41,18 @@
           console.log(color.value);
         },
     );
+
+    // update the topping (hide/show) when changed
     watch(
         toppings,
         (newVal) => {
-          console.log(newVal);
+            oldTopping = topping.value;
+            topping.value = newVal;
+            console.log(newVal);
         },
     );
-    const text = ref("");
+
+    // update the comment when edited
     watch(
         extraWishes,
         (newVal) => {
@@ -34,8 +60,6 @@
           console.log(text.value);
         },
     );
-    const loader = new GLTFLoader();
-    const dracoLoader = new DRACOLoader();
     
     const props = defineProps({
         donutData: {
@@ -64,13 +88,13 @@
             new THREE.MeshBasicMaterial({ color: 0xffffff }),
             new THREE.MeshBasicMaterial({ color: 0xffffff }),
             new THREE.MeshBasicMaterial({ color: 0xffffff }),
-            new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( donutLogo ), transparent: true, opacity: 1, }),
-            // new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(donutLogo) }),
+            // new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( donutLogo ), transparent: true, opacity: 1, }),
+            new THREE.MeshBasicMaterial({ color: 0xffffff }),
             new THREE.MeshBasicMaterial({ color: 0xffffff }),
         ];
 
 
-        //Loading the model and adding it to the scene
+        //load only the donut model
         const loadDonut = (position = [0, 0, 0], scale = [1, 1, 1], colors = false) => {
             // Load the donut model
             loader.load(
@@ -101,30 +125,8 @@
             cube.scale.set(0.05, 0.03, 0.001);
             scene.add( cube );
         }
-        //loading the bounty model and addit it to the scene
-        const loadBounty = (position = [0, 0, 0], scale = [1, 1, 1], colors = false) => {
-            // Load the bounty model
-            loader.load(
-                bounty,
-
-                ( gltf ) => {
-                    const root = gltf.scene;
-                    root.scale.set(...scale);
-                    root.position.set(...position);
-                    scene.add( root );
-                },
-
-                ( xhr ) => {
-                    console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-                },
-
-                ( error ) => {
-                    console.log( 'An error happened' );
-                    console.error( error );
-                }
-            );
-        }
-
+ 
+        // Load only the glaze model
         const loadGlaze = (position = [0, 0, 0], scale = [1, 1, 1], colors = false) => {
             // Load the glaze model
             loader.load(
@@ -151,7 +153,6 @@
             );
         }
 
-
         // Setting up the lights
         const ambientLight = new THREE.AmbientLight(0xffffff, 1);
         ambientLight.position.set(2, 2, 5);
@@ -172,13 +173,14 @@
         document.querySelector(".configurator__canvas").appendChild( renderer.domElement );
         renderer.render( scene, camera );
 
-        
+        // update the color of the glaze
         const updateColor = () => {
             scene.traverse( ( child ) => {
                 if ( child.name === "glaze" ) { child.material.color.set(color.value) }
             });
         }
 
+        
         
         // Animating the scene
         const animate = () => {
@@ -189,11 +191,13 @@
 
         // Calling the functions
         loadDonut();
-        loadBounty();
         loadGlaze();
         animate();
         // update glaze color
         watch(color, updateColor);
+        
+        // update topping
+        watch(topping, updateTopping);
 
     })
 
