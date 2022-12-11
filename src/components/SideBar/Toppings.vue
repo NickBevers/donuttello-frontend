@@ -6,37 +6,70 @@ const donutStore = useDonutStore();
 
 const toppings = ref([
   {
-    name: "Bounty",
+    name: "bounty",
     checked: false
   },
   {
-    name: "Optie 2",
+    name: "brownie",
     checked: false
   },
   {
-    name: "Optie 3",
+    name: "caramel",
     checked: false
   },
   {
-    name: "Optie 4",
+    name: "chocolateOrbs",
     checked: false
   },
   {
-    name: "Optie 5",
+    name: "coconut",
     checked: false
   },
   {
-    name: "Optie 6",
+    name: "coffeeBean",
+    checked: false
+  },
+  // {
+  //   name: "glazeFullDonut",
+  //   checked: false
+  // },
+  {
+    name: "glazeLines",
     checked: false
   },
   {
-    name: "Optie 7",
+    name: "leo",
     checked: false
   },
   {
-    name: "Optie x",
+    name: "maltesers",
     checked: false
-  }
+  },
+  {
+    name: "marshmallow",
+    checked: false
+  },
+  {
+    name: "nuts",
+    checked: false
+  },
+  {
+    name: "orangePeel",
+    checked: false
+  },
+  {
+    name: "oreo",
+    checked: false
+  },
+  {
+    name: "pistachio",
+    checked: false
+  },
+  {
+    name: "twix",
+    checked: false
+  },
+
 ]);
 
 const checked = ref(false);
