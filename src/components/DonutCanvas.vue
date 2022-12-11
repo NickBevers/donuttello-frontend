@@ -232,6 +232,29 @@ onMounted(() => {
             }
         );
     }
+    // load all topping dynamically
+    const loadModel = (position = [0, 0, 0], scale = [1, 1, 1], model, arrayItem) => {
+        loader.load(
+            model,
+
+            (gltf) => {
+                arrayItem.variable = gltf.scene;
+                arrayItem.variable.visible = false;
+                arrayItem.variable.scale.set(...scale);
+                arrayItem.variable.position.set(...position);
+                scene.add(arrayItem.variable);
+            },
+
+            (xhr) => {
+                console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+            },
+
+            (error) => {
+                console.log('An error happened');
+                console.error(error);
+            }
+        );
+    }
 
     // Setting up the lights
     const ambientLight = new THREE.AmbientLight(0xffffff, 1);
