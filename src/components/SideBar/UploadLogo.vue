@@ -1,7 +1,35 @@
 <script setup>
-    import{ref} from "vue";
+    import { ref, onMounted } from "vue";
+    import { useDonutStore } from "../../stores/donutConf.js";
+    const donutStore = useDonutStore();
     const checked = ref(false);
-    
+    let imageUrl = ref("");
+
+    function setImage(url) {
+        imageUrl.value = url;
+        donutStore.setLogo(imageUrl.value);
+    }
+
+    const uploadImage = () => {
+        const file = document.getElementById("fileUpload").files[0];
+        let formData = new FormData();
+
+        formData.append("file", file);
+        formData.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
+
+        fetch(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_NAME}/image/upload`, {
+            method: "POST",
+            body: formData,
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            // console.log(data);
+            setImage(data.secure_url);
+        });
+    };
+
+
+
 </script>
 
 <template>
@@ -16,7 +44,7 @@
         Upload hier jouw logo <br>
         We accepteren png's, jpg's, jpeg's and webp's
       </label>
-      <input class="input__file" type="file" id="fileUpload" name="fileUpload">
+      <input class="input__file" type="file" id="fileUpload" name="fileUpload" @change="uploadImage">
     </section>
   </div>
 </template>

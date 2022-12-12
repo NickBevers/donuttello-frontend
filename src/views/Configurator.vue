@@ -4,9 +4,21 @@
     import DonutCanvas from '../components/DonutCanvas.vue';
 
     const logAll = (donut) => {
-        console.log(donut.color);
-        console.log(donut.topping);
-        console.log(donut.text);
+        console.log(donut.filling);
+        console.log(donut.glazeColor);
+        console.log(donut.toppings);
+        console.log(donut.sprinkles);
+        console.log(donut.logoShape);
+        console.log(donut.comment);
+        console.log(donut.logo);
+        /* 
+            filling: tempFilling.value,
+            glazeColor: tempColor.value,
+            toppings: tempTopping.value,
+            sprinkles: tempSprinkles.value,
+            logoShape: tempShape.value,
+            comment: tempComment.value
+        */
     }
 
 </script>

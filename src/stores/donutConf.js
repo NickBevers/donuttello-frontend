@@ -8,7 +8,8 @@ export const useDonutStore = defineStore({
         sprinkles: 'none',
         logoShape: 'rectangle',
         comment: '',
-        filling: 'none'
+        filling: 'none',
+        logo: '',
     }),
     getters: {
         getGlazeColor() {
@@ -28,6 +29,9 @@ export const useDonutStore = defineStore({
         },
         getFilling() {
             return this.filling;
+        },
+        getLogo() {
+            return this.logo;
         }
     },
     actions: {
@@ -48,6 +52,9 @@ export const useDonutStore = defineStore({
         },
         setFilling(filling) {
             this.filling = filling;
+        },
+        setLogo(logo) {
+            this.logo = logo;
         }
     }
 });

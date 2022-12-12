@@ -29,10 +29,11 @@ import twixModel from "../assets/models/compressed/twix.glb";
 const loader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();
 const donutStore = useDonutStore();
-const { glazeColor, comment, toppings } = storeToRefs(donutStore);
+const { glazeColor, comment, toppings, logo } = storeToRefs(donutStore);
 const color = ref("");
 const topping = ref("");
 const text = ref("");
+const logoUrl = ref("");
 let oldTopping = "";
 let bounty = "", brownie = "", caramel = "", chocolateOrbs = "", coconut = "", coffeeBean = "", glazeLines = "", leo = "", maltesers = "", marshmallow = "", oreo = "", nuts = "", orangePeel = "", pistachio = "", twix = "";
 let toppingArray = [
@@ -149,7 +150,7 @@ watch(
     comment,
     (newVal) => {
         text.value = newVal;
-        console.log(text.value);
+        // console.log(text.value);
     },
 );
 
@@ -201,6 +202,16 @@ onMounted(() => {
             oldTopping = topping.value;
             topping.value = newVal;
             updateTopping();
+        },
+    );
+
+    // update the logo when changed in the logo picker
+    watch(
+        logo,
+        (newVal) => {
+            logoUrl.value = newVal;
+            // console.log(logoUrl.value);
+            loadLogo();
         },
     );
 
@@ -299,6 +310,19 @@ onMounted(() => {
         );
     }
 
+    const loadLogo = () => {
+        const geometry = new THREE.PlaneGeometry(0.04, 0.025);
+        const material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(logoUrl.value), side: THREE.DoubleSide, transparent: true, opacity: 1, });
+        const image = new THREE.Mesh(
+            // new THREE.MeshBasicMaterial({ map: new THREE.ImageUtils.loadTexture(detailData.logo) }),
+            geometry,
+            material
+        );
+        image.position.set(-0.02, 0.039, -0.04);
+        image.rotation.set(1.9, 3, 3.5);
+        scene.add(image);
+    }
+
     // Setting up the lights
     const ambientLight = new THREE.AmbientLight(0xffffff,  1);
     ambientLight.name = "ambientLight";
@@ -369,7 +393,7 @@ onMounted(() => {
     loadToppings();
     animate();
     // update glaze color
-    // watch(color, updateColor);
+    watch(color, updateColor);
 })
 
 
