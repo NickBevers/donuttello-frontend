@@ -1,41 +1,16 @@
 <script setup>
-import{ref} from "vue";
-const shapes = ref([
-    {
-    name: "Vierkant",
-    checked: false
-    },
-    {
-    name: "Cirkel",
-    checked: false
-    },
-    {
-    name: "Rechthoek",
-    checked: false
-    },
-    {
-    name: "Ovaal",
-    checked: false
+    import { ref } from "vue";
+    import { useDonutStore } from "../../stores/donutConf";
+    let logoShape = ref("Geen");
+    const donutStore = useDonutStore();
+    const shapes = ref([ "Vierkant", "Cirkel", "Rechthoek", "Ovaal" ]);
+
+    const checked = ref(false);
+
+    function selectShape(shape) {
+        logoShape.value = shape;
+        donutStore.setLogoShape(logoShape.value);
     }
-]);
-
-const checked = ref(false);
-const select = ref(false);
-
-function selectTopping(shapes) {
-
-  const listItems = document.querySelector(".confSidebar__item__section--listing").children;
-  for (let i = 0; i < listItems.length; i++) {
-    listItems[i].classList.remove("active");
-  }
-
-  console.log(shapes.name);
-
-  shapes.checked = !shapes.checked;
-  console.log(shapes.checked);
-
-}
-
 </script>
 <template>
   <div class="confSidebar__item">
@@ -46,7 +21,7 @@ function selectTopping(shapes) {
 
     <section v-if="checked" class="confSidebar__item__section">
       <ul class="confSidebar__item__section--listing">
-        <li v-for="shapes in shapes" :class="{active: shapes.checked}" class="listing__item" :key="shapes.name" @click="selectTopping(shapes)"> {{shapes.name}} </li>
+        <li v-for="shape in shapes" :class="{ 'active' : shape === logoShape }" class="listing__item" :key="shape.name" @click="selectShape(shape)"> {{ shape }} </li>
       </ul>
     </section>
   </div>
@@ -57,12 +32,17 @@ function selectTopping(shapes) {
 .listing__item {
     padding: 0;
     margin: 0 1em 1em 0;
-    width: 4em;
-    height: 4em;
+    width: 6em;
+    height: 3.5em;
     opacity: 0.5;
-    background-color: #C4C03A;
+    display: grid;
+    place-items: center;
+    background-color: var(--blue--pastel);
     border-radius: 0.25rem;
     border: 1px solid rgb(220, 220, 220);
+    cursor: pointer;
+    font-weight: var(--font-weight--semi-bold);
+    color: var(--black);
 }
 
 .listing__item__image {
