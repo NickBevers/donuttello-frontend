@@ -30,7 +30,7 @@
 
     //ordered, inProduction, produced
     function changeStatus(status){
-        fetch(`http://localhost:3000/api/v1/donuts/status/${donutId}`, {
+        fetch(`https://donuttello-backend.onrender.com/api/v1/donuts/status/${donutId}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
