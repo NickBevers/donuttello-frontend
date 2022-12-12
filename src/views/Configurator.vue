@@ -3,13 +3,19 @@
     import ConfiguratorSidebar from '../components/ConfiguratorSidebar.vue';
     import DonutCanvas from '../components/DonutCanvas.vue';
 
+    const logAll = (donut) => {
+        console.log(donut.color);
+        console.log(donut.topping);
+        console.log(donut.text);
+    }
+
 </script>
 
 <template>
     <div class="home">
         <Navigation />
         <div class="configurator__container">
-            <ConfiguratorSidebar />
+            <ConfiguratorSidebar @createDonut="logAll" />
             <div class="configurator__canvas">
                 <DonutCanvas />
             </div>

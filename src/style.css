@@ -63,7 +63,8 @@ body {
     padding: 1em 1.5em;
     border-bottom: 1px solid #d5d5d5;
 }
-.confSidebar__item:last-child {
+
+.confSidebar__item:last-of-type {
     border-bottom: none;
 }
 

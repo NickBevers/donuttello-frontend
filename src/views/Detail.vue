@@ -20,10 +20,10 @@
         if (data.status === "success") {
             // console.log(data);
             donut.data = data.data;
-            console.log(donut.data);
+            // console.log(donut.data);
         } else {
             console.log("something went wrong, please try again");
-            console.log(data);
+            // console.log(data);
         }
     });
 
@@ -43,12 +43,12 @@
         .then((response) => response.json())
         .then((data) => {
             if (data.status === "success") {
-                console.log(data);
+                // console.log(data);
                 donut.data = data.data;
-                console.log(donut.data);
+                // console.log(donut.data);
             } else {
                 console.log("something went wrong, please try again");
-                console.log(data);
+                // console.log(data);
             }
         });
     }

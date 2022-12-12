@@ -8,7 +8,7 @@
 
 
     const handleInput = () => {
-        donutStore.setExtraWishes(textFieldInput.value);
+        donutStore.setComment(textFieldInput.value);
     };
 </script>
 
@@ -21,7 +21,7 @@
 
         <section v-if="checked" class="confSidebar__item__section">
             <form action="">
-                <textarea name="commentField" v-model="textFieldInput" @input="handleInput()" id="commentField" class="confSidebar__item--commentField" cols="30" rows="10">
+                <textarea name="commentField" v-model="textFieldInput" @input="handleInput()" id="commentField" class="confSidebar__item--commentField" rows="10" >
                     Here is a text field
                 </textarea>
             </form>
@@ -50,6 +50,12 @@
 }
 .confSidebar__item__checkbox:checked{
     transform: rotate(-180deg);
+}
+
+.confSidebar__item--commentField{
+    font-family: 'Dosis', sans-serif;
+    font-size: var(--font-size-medium);
+    width: 100%;
 }
 
 </style>

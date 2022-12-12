@@ -24,7 +24,7 @@
         .then((response) => response.json())
         .then((data) => {
             if (data.status === "success") {
-                console.log(data);
+                // console.log(data);
                 localStorage.setItem("jwtToken", data.token);
                 email.value = "";
                 password.value = "";

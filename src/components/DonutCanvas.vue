@@ -29,7 +29,7 @@ import twixModel from "../assets/models/compressed/twix.glb";
 const loader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();
 const donutStore = useDonutStore();
-const { glazeColor, extraWishes, toppings } = storeToRefs(donutStore);
+const { glazeColor, comment, toppings } = storeToRefs(donutStore);
 const color = ref("");
 const topping = ref("");
 const text = ref("");
@@ -140,13 +140,13 @@ watch(
     glazeColor,
     (newVal) => {
         color.value = newVal;
-        console.log(color.value);
+        // console.log(color.value);
     },
 );
 
 // update the comment when edited
 watch(
-    extraWishes,
+    comment,
     (newVal) => {
         text.value = newVal;
         console.log(text.value);
@@ -340,8 +340,8 @@ onMounted(() => {
 
         // get index from topingArray by name
         const newIndex = toppingArray.findIndex((item) => item.name === topping.value);
-        console.log(newIndex);
-        console.log(toppingArray[newIndex]);
+        // console.log(newIndex);
+        // console.log(toppingArray[newIndex]);
 
         // Show the new topping
         toppingArray[newIndex].variable.visible = true;
@@ -369,18 +369,14 @@ onMounted(() => {
     loadToppings();
     animate();
     // update glaze color
-    watch(color, updateColor);
-
-    // update topping
-    // watch(topping, updateTopping);
-
+    // watch(color, updateColor);
 })
 
 
 </script>
 
 <template>
-
+    
 </template>
 
 <style scoped>

@@ -43,7 +43,7 @@
             if (data.status === "success") {
                 donuts.value = data.data;
             } else {
-                console.log(data);
+                // console.log(data);
             }
         });
     }

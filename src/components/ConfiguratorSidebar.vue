@@ -1,11 +1,61 @@
 <script setup>
-    import { ref } from 'vue'
+    import { ref, watch } from 'vue';
+    import { storeToRefs } from "pinia";
     import FillingList from './SideBar/FillingList.vue';
     import GlazeColour from './SideBar/GlazeColour.vue';
     import Toppings from './SideBar/Toppings.vue';
     import UploadLogo from './SideBar/UploadLogo.vue';
     import LogoShape from './SideBar/LogoShape.vue';
     import CommentField from './SideBar/CommentField.vue';
+    import { useDonutStore } from '../stores/donutConf.js';
+    const donutStore = useDonutStore();
+    const { glazeColor, toppings, sprinkles, logoShape, comment, filling } = storeToRefs(donutStore);
+
+    const emit = defineEmits(['createDonut']);
+    const createDonut = () => {
+        emit("createDonut", {
+            filling: tempFilling.value,
+            glazeColor: tempColor.value,
+            toppings: tempTopping.value,
+            sprinkles: tempSprinkles.value,
+            logoShape: tempShape.value,
+            comment: tempComment.value
+        });
+    }
+
+    const tempFilling = ref("none");
+    const tempColor = ref("#ffffff");
+    const tempTopping = ref("none");
+    const tempSprinkles = ref("none");
+    const tempShape = ref("rectangle");
+    const tempComment = ref("");
+
+    watch(filling, (value) => {
+        tempFilling.value = value;
+    });
+
+    watch(sprinkles, (value) => {
+        tempSprinkles.value = value;
+    });
+
+    watch(glazeColor, (value) => {
+        tempColor.value = value;
+    });
+
+    watch(toppings, (value) => {
+        tempTopping.value = value;
+    });
+
+    watch(logoShape, (value) => {
+        tempShape.value = value;
+    });
+
+    watch(comment, (value) => {
+        tempComment.value = value;
+    });
+
+
+
 </script>
 
 <template>
@@ -16,6 +66,10 @@
         <UploadLogo />
         <LogoShape />
         <CommentField />
+
+        <div class="confSidebar__create_donut">
+            <a class="confSidebar__button--create" @click="createDonut">Submit</a>
+        </div>
     </div>
 </template>
 
@@ -26,5 +80,35 @@
         overflow-y: auto;
         scrollbar-width: thin;
         scrollbar-color: var(--pink--main) var(--white);
+    }
+
+    .confSidebar__create_donut{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 15em;
+        height: 3em;
+        margin: 0 auto;
+        position: absolute;
+        top: 8.2em;
+        right: 2em;
+    }
+
+    .confSidebar__button--create{
+        width: 80%;
+        height: 100%;
+        display: grid;
+        place-items: center;
+        font-size: var(--font-size--small);
+        font-weight: var(--font-weight--bold);
+        border-radius: var(--border-radius);
+        background-color: var(--pink--main);
+        color: var(--white);
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+
+    .confSidebar__button--create:hover{
+        color: var(--yellow--main);
     }
 </style>

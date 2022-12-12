@@ -37,14 +37,16 @@ function toggle() {
     padding: 0;
     margin: 0 1em 1em 0;
     width: 6em;
-    height: 4em;
+    height: 3.5em;
     opacity: 0.5;
     display: grid;
     place-items: center;
-    background-color: #C4C03A;
+    background-color: var(--blue--pastel);
     border-radius: 0.25rem;
     border: 1px solid rgb(220, 220, 220);
     cursor: pointer;
+    font-weight: var(--font-weight--semi-bold);
+    color: var(--black);
 }
 .listing__item__image {
     padding: 0;

@@ -3,12 +3,12 @@ import { defineStore } from "pinia";
 export const useDonutStore = defineStore({
     id: "donut",
     state: () => ({
-        glazeColor: "#000",
-        toppings: '',
-        sprinkles: '',
-        logoShape: '',
-        extraWishes: '',
-        filling: ''
+        glazeColor: "#ffffff",
+        toppings: 'none',
+        sprinkles: 'none',
+        logoShape: 'rectangle',
+        comment: '',
+        filling: 'none'
     }),
     getters: {
         getGlazeColor() {
@@ -23,8 +23,8 @@ export const useDonutStore = defineStore({
         getLogoShape() {
             return this.logoShape;
         },
-        getExtraWishes() {
-            return this.extraWishes;
+        getComment() {
+            return this.comment;
         },
         getFilling() {
             return this.filling;
@@ -43,8 +43,8 @@ export const useDonutStore = defineStore({
         setLogoShape(logoShape) {
             this.logoShape = logoShape;
         },
-        setExtraWishes(extraWishes) {
-            this.extraWishes = extraWishes;
+        setComment(comment) {
+            this.comment = comment;
         },
         setFilling(filling) {
             this.filling = filling;

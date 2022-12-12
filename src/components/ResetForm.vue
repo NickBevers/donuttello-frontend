@@ -25,7 +25,7 @@
         .then((response) => response.json())
         .then((data) => {
             if (data.status === "success") {
-                console.log(data);
+                // console.log(data);
                 email.value = "";
                 passwordOld.value = "";
                 passwordNew.value = "";
