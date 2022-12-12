@@ -97,7 +97,7 @@
             
             <li class="detailSidebar__item item--orderDate">
                 <span class="item__label">Order date: </span>
-                <span class="item__value">{{detailData.orderDate}}</span>
+                <span class="item__value">{{new Date(detailData.dateCreated).toLocaleDateString('en-GB')}}</span>
             </li>
         </ul
         >

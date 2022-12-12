@@ -16,7 +16,7 @@
     import chocolateOrbsModel from "../assets/models/compressed/chocolateOrbs.glb";
     import coconutModel from "../assets/models/compressed/coconut.glb";
     import coffeeBeanModel from "../assets/models/compressed/coffeeBean.glb";
-    import glazeLinesModel from "../assets/models/glazeLines.glb";
+    import glazeLinesModel from "../assets/models/compressed/glazeLines.glb";
     import leoModel from "../assets/models/compressed/leo.glb";
     import maltesersModel from "../assets/models/compressed/maltesers.glb";
     import marshmallowModel from "../assets/models/compressed/marshmallow.glb";
@@ -56,6 +56,7 @@
             if (detailData.glaze) {
 
                 loadLogoShape(detailData.logoShape);
+                loadTopping(detailData.topping2);
 
                 if(!glaze){
                     setTimeout(() => {
@@ -151,6 +152,128 @@
             scene.add(logoShape);
         }
 
+        const loadTopping = (topping, scale = [1, 1, 1], colors = false) => {
+            let toppingModel, color, position;
+            switch(topping){
+                case "bounty":
+                    toppingModel = bountyModel;
+                    position = [0, 0.002, 0]
+                    color = 0x583020;
+                    break;
+                case "brownie":
+                    toppingModel = brownieModel;
+                    position = [-0.01, 0, 0.01]
+                    color = 0x583020;
+                    break;
+                case "caramel":
+                    toppingModel = caramelModel;
+                    position = [0, 0, -0.0025]
+                    color = 0xf59547;
+                    break;
+                case "chocolateOrbs":
+                    toppingModel = chocolateOrbsModel;
+                    position = [0, 0, 0];
+                    color = ["#f5f5f5", "#d4955b", "#472301"];
+                    break;
+                case "coconut":
+                    toppingModel = coconutModel;
+                    position = [0, -0.001, 0]
+                    color = 0xf5f5f5;
+                    break;
+                case "coffeeBean":
+                    toppingModel = coffeeBeanModel;
+                    position = [0, 0, 0]
+                    color = 0x70441a;
+                    break;
+                case "glazeLines":
+                    toppingModel = glazeLinesModel;
+                    position = [0, 0, 0]
+                    color = 0xe3f2b1;
+                    break;
+                case "leo":
+                    toppingModel = leoModel;
+                    position = [0, 0, 0]
+                    color = 0xbf804d;
+                    break;
+                case "maltesers":
+                    toppingModel = maltesersModel;
+                    position = [0, 0, 0]
+                    color = 0xbf6d21;
+                    break;
+                case "marshmallow":
+                    toppingModel = marshmallowModel;
+                    position = [0, 0, -0.0017]
+                    color = 0xfafafa;
+                    break;
+                case "nuts":
+                    toppingModel = nutsModel;
+                    position = [0, 0, 0]
+                    // color = 0x583020;
+                    break;
+                case "oreo":
+                    toppingModel = oreoModel;
+                    position = [0, 0, 0]
+                    // color = 0x583020;
+                    break;
+                case "orangePeel":
+                    toppingModel = orangePeelModel;
+                    position = [0, -0.005, 0.09]
+                    scale = [1.2, 1.2, 1.2];
+                    color = 0xf08024;
+                    break;
+                case "pistachio":
+                    toppingModel = pistachioModel;
+                    position = [0, -0.001, 0]
+                    color = 0xcfeb60;
+                    break;
+                case "twix":
+                    toppingModel = twixModel;
+                    position = [0, 0, 0]
+                    color = 0xb06a25;
+                    break;
+                default:
+                    break;
+            }
+
+            // Load the topping model
+            loader.load(
+                toppingModel,
+
+                (gltf) => {
+                    const root = gltf.scene;
+                    if(Array.isArray(color)){
+                        root.traverse((o) => {
+                            if (o.name === "chocolateWhite") {
+                                o.material.color.set(color[0]);
+                            } else if (o.name === "chocolateMilk") {
+                                o.material.color.set(color[1]);
+                            } else if (o.name === "chocolateDark") {
+                                o.material.color.set(color[2]);
+                            }
+                        });
+                    } else if(color){
+                        root.traverse((o) => {
+                            if (o.isMesh) {
+                                o.material.color.set(color);
+                            }
+                        });
+                    }
+                    root.scale.set(...scale);
+                    root.position.set(...position);
+                    scene.add(root);
+                },
+
+                (xhr) => {
+                    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+                },
+
+                (error) => {
+                    console.log('An error happened');
+                    console.error(error);
+                }
+            );
+        }
+
 
         //Loading the model and adding it to the scene
         const loadDonut = (position = [0, 0, 0], scale = [1, 1, 1], colors = false) => {
@@ -209,7 +332,6 @@
 
                 (gltf) => {
                     sprinkles = gltf.scene;
-                    console.log(sprinkles);
                     sprinkles.traverse((child) => {
                         if (child.name === "sprinkles") { child.material.color.set("#ffffff") }
                     });
