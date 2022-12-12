@@ -6,11 +6,11 @@ const shapes = ref([
     checked: false
     },
     {
-    name: "Cirkelvormig",
+    name: "Cirkel",
     checked: false
     },
     {
-    name: "Rechthoekig",
+    name: "Rechthoek",
     checked: false
     },
     {
