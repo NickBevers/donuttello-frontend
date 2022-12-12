@@ -53,10 +53,13 @@
         watch(detailProps, () => {
             detailData = detailProps.donut;
 
-            if (detailData.glaze) {
-
+            if (detailData) {
                 loadLogoShape(detailData.logoShape);
                 loadTopping(detailData.topping2);
+
+                if(detailData.logo){
+                    loadLogo();
+                }
 
                 if(!glaze){
                     setTimeout(() => {
@@ -80,10 +83,10 @@
                     });
 
                     sprinkles.traverse((child) => {
-                            if (child.name === "sprinkles") {
-                                child.material.color.set(detailData.topping1.split(" ")[1]);
-                            }
-                        });
+                        if (child.name === "sprinkles") {
+                            child.material.color.set(detailData.topping1.split(" ")[1]);
+                        }
+                    });
                 }
 
             }
@@ -272,6 +275,20 @@
                     console.error(error);
                 }
             );
+        }
+
+        const loadLogo = () => {
+            const geometry = new THREE.PlaneGeometry(0.04, 0.025);
+            const material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(detailData.logo), side: THREE.DoubleSide, transparent: true, opacity: 1, });
+            const image = new THREE.Mesh(
+                // new THREE.MeshBasicMaterial({ map: new THREE.ImageUtils.loadTexture(detailData.logo) }),
+                geometry,
+                material
+            );
+            image.position.set(0, 0.04, -0.045);
+            image.rotation.set(2.007, 3.14, 3.14);
+            // image.scale.set(0.05, 0.03, 0.001);
+            scene.add(image);
         }
 
 
