@@ -28,6 +28,32 @@
     });
 
 
+    //ordered, inProduction, produced
+    function changeStatus(status){
+        fetch(`http://localhost:3000/api/v1/donuts/status/${donutId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("jwtToken")
+            },
+            body: JSON.stringify({
+                orderStatus: status
+            })
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.status === "success") {
+                console.log(data);
+                donut.data = data.data;
+                console.log(donut.data);
+            } else {
+                console.log("something went wrong, please try again");
+                console.log(data);
+            }
+        });
+    }
+
+
 </script>
 
 <template>
@@ -39,6 +65,12 @@
             <div class="configurator__canvas donut__detail__canvas">
                 <DetailCanvas :donut="donut.data" />
             </div>
+        </div>
+
+        <div class="statusBtn__container">
+            <a class="statusBtn btn--production" @click="changeStatus( `inProduction`)" v-if="donut.data.orderStatus==='ordered'">Bestelling is in productie</a>
+            <a class="statusBtn btn--production disabled" v-else>Bestelling is in productie</a>
+            <a class="statusBtn btn--done" @click="changeStatus(`produced`)">Bestelling is klaar</a>
         </div>
     </div>
 </template>
@@ -58,6 +90,42 @@
     .configurator__canvas{
         width: 82vw;
         height: calc(100vh - 5.7em);
+    }
+
+    .statusBtn__container{
+        position: absolute;
+        top: 6em;
+        right: 2em;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .statusBtn{
+        padding: 0.5em 0.8em;
+        margin: 0.3em 0;
+        background-color: var(--pink--main);
+        border-radius: var(--border-radius);
+        font-weight: var(--font-weight--semi-bold);
+        text-transform: uppercase;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .statusBtn:hover{
+        color: var(--yellow--main);
+    }    
+
+    .statusBtn:first-of-type{
+        margin-top: 1.5em;
+    }
+
+    .disabled{
+        background-color: var(--pink--pastel);
+        cursor: not-allowed;
+    }
+
+    .disabled:hover{
+        color: var(--white);
     }
 
 </style>
