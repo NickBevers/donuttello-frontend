@@ -1,78 +1,79 @@
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
+import { useDonutStore } from "../../stores/donutConf.js";
+
+const donutStore = useDonutStore();
 const checked = ref(false);
-const fillings = ref([
-  {
-    name: "Optie 1",
-    checked: false
-  },
-  {
-    name: "Optie 2",
-    checked: false
-  },
-  {
-    name: "Optie 3",
-    checked: false
-  },
-  {
-    name: "Optie 4",
-    checked: false
-  },
-  {
-    name: "Optie 5",
-    checked: false
-  },
-  {
-    name: "Optie 6",
-    checked: false
-  },
-  {
-    name: "Optie 7",
-    checked: false
-  },
-  {
-    name: "Optie x",
-    checked: false
-  }
-]);
-const select = ref(false);
-function selectTopping(fillings) {
+const fillings = ref(["Geen", "Vanilla", "Chocolade", "Caramel", "Aardbei", "Rijstpap", "Pindakaas", "Appelsien"]);
+let flavour = ref("Geen");
 
-  const listItems = document.querySelector(".confSidebar__item__section--listing").children;
-  for (let i = 0; i < listItems.length; i++) {
-    listItems[i].classList.remove("active");
-  }
-
-  console.log(fillings.name);
-
-  fillings.checked = !fillings.checked;
-  console.log(fillings.checked);
-
+function selectFilling(filling) {
+    flavour.value = filling;
+    donutStore.setFilling(flavour.value);
 }
+
 </script>
 <template>
-  <div class="confSidebar__item">
-    <header class="confSidebar__item__header">
-      <h3 class="confSidebar__item__header__heading">Vulling</h3>
-      <input type="checkbox" id="checkbox" v-model="checked" @click="toggle = !toggle"/>
+    <div class="confSidebar__item">
+        <header class="confSidebar__item__header">
+            <h3 class="confSidebar__item__header__heading">Vulling</h3>
+            <input class="confSidebar__item__checkbox"  type="checkbox" id="checkbox" v-model="checked" @click="checked = !checked" />
+        </header>
 
-    </header>
-    <section v-if="toggle" class="confSidebar__item__section">
-      <ul class="confSidebar__item__section--listing">
-        <li v-for="fillings in fillings" :class="{active: fillings.checked}" class="listing__item" :key="fillings.name" @click="selectTopping(fillings)">
-          {{fillings.name}}
-        </li>
-      </ul>
-    </section>
-  </div>
+        <section v-if="checked" class="confSidebar__item__section">
+            <ul class="confSidebar__item__section--listing">
+                <li v-for="filling in fillings" class="listing__item listing__item--filling" :class="{ 'active' : flavour === filling }" :key="filling" @click="selectFilling(filling)"> {{ filling }} </li>
+            </ul>
+        </section>
+    </div>
 </template>
 
 <style scoped>
+.listing__item {
+    padding: 0;
+    margin: 0 1em 1em 0;
+    width: 6em;
+    height: 4em;
+    opacity: 0.5;
+    display: grid;
+    place-items: center;
+    background-color: #C4C03A;
+    border-radius: 0.25rem;
+    border: 1px solid rgb(220, 220, 220);
+    cursor: pointer;
+}
+
+.listing__item__image {
+    padding: 0;
+    width: 4em;
+    height: 4em;
+    border-radius: 0.5em;
+    border: 1px solid var(--grey);
+}
+
 .active {
-  color: #212529;
-  background-color: #ffb0b3;
-  opacity: 1;
-  border: 1px solid rgb(211, 207, 207);
-  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.25));
+    color: #212529;
+    background-color: #ffb0b3;
+    opacity: 1;
+    border: 1px solid rgb(211, 207, 207);
+    filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.25));
+}
+
+.confSidebar__item__checkbox{
+    -webkit-appearance: none;
+    appearance: none;
+    background: url("../../assets/images/arrow--down.svg");
+    background-position: center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0.5em 0 0 0.5em;
+    cursor: pointer;
+    transition: transform 0.25s ease-in-out;
+}
+.confSidebar__item__checkbox:checked{
+    transform: rotate(-180deg);
 }
 </style>

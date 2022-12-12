@@ -8,12 +8,13 @@ export const useDonutStore = defineStore({
         sprinkles: '',
         logoShape: '',
         extraWishes: '',
+        filling: ''
     }),
     getters: {
         getGlazeColor() {
             return this.glazeColor;
         },
-        getToppings() {
+        getTopping() {
             return this.toppings;
         },
         getSprinkles() {
@@ -24,13 +25,16 @@ export const useDonutStore = defineStore({
         },
         getExtraWishes() {
             return this.extraWishes;
+        },
+        getFilling() {
+            return this.filling;
         }
     },
     actions: {
         setGlazeColor(color) {
             this.glazeColor = color;
         },
-        setToppings(toppings) {
+        setTopping(toppings) {
             this.toppings = toppings;
         },
         setSprinkles(sprinkles) {
@@ -41,6 +45,9 @@ export const useDonutStore = defineStore({
         },
         setExtraWishes(extraWishes) {
             this.extraWishes = extraWishes;
+        },
+        setFilling(filling) {
+            this.filling = filling;
         }
     }
 });

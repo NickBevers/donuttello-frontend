@@ -102,24 +102,7 @@ body {
     flex-flow: wrap;
 }
 
-.listing__item {
-    padding: 0;
-    margin: 0 1em 1em 0;
-    width: 4em;
-    height: 4em;
-    opacity: 0.5;
-    background-color: #C4C03A;
-    border-radius: 0.25rem;
-    border: 1px solid rgb(220, 220, 220);
-}
 
-.listing__item__image {
-    padding: 0;
-    width: 4em;
-    height: 4em;
-    border-radius: 0.5em;
-    border: 1px solid var(--grey);
-}
 
 .input__file__label{
     padding: 2em 1em;

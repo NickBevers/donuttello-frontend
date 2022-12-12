@@ -9,13 +9,13 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import donutModel from "../assets/models/compressed/dough.glb";
 import glazeModel from "../assets/models/compressed/glaze.glb";
 import donutLogo from "../assets/images/donuttello-logo.png";
+import sprinklesModel from "../assets/models/sprinkles.glb";
 import bountyModel from "../assets/models/compressed/bounty.glb";
 import brownieModel from "../assets/models/compressed/brownie.glb";
 import caramelModel from "../assets/models/compressed/caramel.glb";
 import chocolateOrbsModel from "../assets/models/compressed/chocolateOrbs.glb";
 import coconutModel from "../assets/models/compressed/coconut.glb";
-import coffeeBeanModel from "../assets/models/compressed/coffeeBean.glb";
-import glazeLinesModel from "../assets/models/glazeLines.glb";
+import glazeLinesModel from "../assets/models/compressed/glazeLines.glb";
 import leoModel from "../assets/models/compressed/leo.glb";
 import maltesersModel from "../assets/models/compressed/maltesers.glb";
 import marshmallowModel from "../assets/models/compressed/marshmallow.glb";
@@ -39,77 +39,99 @@ let toppingArray = [
     {
         name: "bounty",
         model: bountyModel,
-        variable: bounty
+        variable: bounty,
+        position: [0, 0.002, 0],
+        color: 0x583020
     },
     {
         name: "brownie",
         model: brownieModel,
-        variable: brownie
+        variable: brownie,
+        position: [-0.01, 0, 0.01],
+        color: 0x583020
     },
     {
         name: "caramel",
         model: caramelModel,
-        variable: caramel
+        variable: caramel,
+        position: [0, 0, 0],
+        color: ["#f5f5f5", "#d4955b", "#472301"],
     },
     {
         name: "chocolateOrbs",
         model: chocolateOrbsModel,
-        variable: chocolateOrbs
+        variable: chocolateOrbs,
+        position: [0, 0, 0],
+        color: ["#f5f5f5", "#d4955b", "#472301"],
     },
     {
         name: "coconut",
         model: coconutModel,
-        variable: coconut
-    },
-    {
-        name: "coffeeBean",
-        model: coffeeBeanModel,
-        variable: coffeeBean
+        variable: coconut,
+        position: [0, -0.001, 0],
+        color: 0xf5f5f5
     },
     {
         name: "glazeLines",
         model: glazeLinesModel,
-        variable: glazeLines
+        variable: glazeLines,
+        position: [0, 0, 0],
+        color: 0xe3f2b1
     },
     {
         name: "leo",
         model: leoModel,
-        variable: leo
+        variable: leo,
+        position: [0, 0, 0],
+        color: 0xbf804d,
     },
     {
         name: "maltesers",
         model: maltesersModel,
-        variable: maltesers
+        variable: maltesers,
+        position: [0, 0, 0],
+        color: 0xbf6d21,
     },
     {
         name: "marshmallow",
         model: marshmallowModel,
-        variable: marshmallow
-    },
-    {
-        name: "oreo",
-        model: oreoModel,
-        variable: oreo
+        variable: marshmallow,
+        position: [0, 0, -0.0017],
+        color: 0xfafafa,
     },
     {
         name: "nuts",
         model: nutsModel,
-        variable: nuts
+        variable: nuts,
+        position: [0, 0, 0],
+    },
+    {
+        name: "oreo",
+        model: oreoModel,
+        variable: oreo,
+        position: [0, 0, 0],
     },
     {
         name: "orangePeel",
         model: orangePeelModel,
-        variable: orangePeel
+        variable: orangePeel,
+        position: [0, -0.005, 0.09],
+        scale: [1.2, 1.2, 1.2],
+        color: 0xf08024,
     },
     {
         name: "pistachio",
         model: pistachioModel,
-        variable: pistachio
+        variable: pistachio,
+        position: [0, -0.001, 0],
+        color: 0xcfeb60,
     },
     {
         name: "twix",
         model: twixModel,
-        variable: twix
+        variable: twix,
+        position: [0, 0, 0],
+        color: 0xb06a25,
     }
 ];
 
@@ -119,16 +141,6 @@ watch(
     (newVal) => {
         color.value = newVal;
         console.log(color.value);
-    },
-);
-
-// update the topping (hide/show) when changed
-watch(
-    toppings,
-    (newVal) => {
-        oldTopping = topping.value;
-        topping.value = newVal;
-        console.log(newVal);
     },
 );
 
@@ -181,6 +193,17 @@ onMounted(() => {
     cube.scale.set(0.05, 0.03, 0.001);
     scene.add(cube);
 
+    
+    // update the topping (hide/show) when changed
+    watch(
+        toppings,
+        (newVal) => {
+            oldTopping = topping.value;
+            topping.value = newVal;
+            updateTopping();
+        },
+    );
+
     //load only the donut model
     const loadDonut = (position = [0, 0, 0], scale = [1, 1, 1], colors = false) => {
         // Load the donut model
@@ -231,8 +254,9 @@ onMounted(() => {
             }
         );
     }
+
     // load all topping dynamically
-    const loadModel = (position = [0, 0, 0], rotation = [0, 0, 0], scale = [1, 1, 1], model, arrayItem) => {
+    const loadModel = (color, position = [0, 0, 0], rotation = [0, 0, 0], scale = [1, 1, 1], model, arrayItem) => {
         loader.load(
             model,
 
@@ -241,9 +265,22 @@ onMounted(() => {
                 // console.log(arrayItem.variable);
                 arrayItem.variable.visible = false;
                 arrayItem.variable.receiveShadow = false;
-                if(arrayItem.variable.children[0].name === "leoo"){
-                    arrayItem.variable.children[0].name = "leo";
-                    arrayItem.variable.children[0].material.color.set(0xad6642);
+                if(Array.isArray(color)){
+                    arrayItem.variable.traverse((o) => {
+                        if (o.name === "chocolateWhite") {
+                            o.material.color.set(color[0]);
+                        } else if (o.name === "chocolateMilk") {
+                            o.material.color.set(color[1]);
+                        } else if (o.name === "chocolateDark") {
+                            o.material.color.set(color[2]);
+                        }
+                    });
+                } else if(color){
+                    arrayItem.variable.traverse((o) => {
+                        if (o.isMesh) {
+                            o.material.color.set(color);
+                        }
+                    });
                 }
                 arrayItem.variable.scale.set(...scale);
                 arrayItem.variable.position.set(...position);
@@ -263,7 +300,7 @@ onMounted(() => {
     }
 
     // Setting up the lights
-    const ambientLight = new THREE.AmbientLight(0xffffff,  1.1);
+    const ambientLight = new THREE.AmbientLight(0xffffff,  1);
     ambientLight.name = "ambientLight";
     // ambientLight.position.set(0, 10, 0);
     scene.add(ambientLight);
@@ -315,7 +352,7 @@ onMounted(() => {
         let modelToLoad;
         toppingArray.forEach((item) => {
             modelToLoad = item.model;
-            loadModel([0, 0, 0], [0, 0, 0], [1, 1, 1], modelToLoad, item);
+            loadModel(item.color, item.position, [0, 0, 0], item.scale || [1, 1, 1], modelToLoad, item);
         });
     }
 
@@ -335,7 +372,7 @@ onMounted(() => {
     watch(color, updateColor);
 
     // update topping
-    watch(topping, updateTopping);
+    // watch(topping, updateTopping);
 
 })
 
