@@ -95,6 +95,7 @@
                     logoShape.position.set(0, 0.038, -0.045);
                     logoShape.rotation.set(2.007, 3.14, 3.14);
                     logoShape.scale.set(0.025, 0.025, 0.002);
+                    scene.add(logoShape);
                     break;
 
                 case "oval":
@@ -104,6 +105,7 @@
                     logoShape.position.set(0, 0.038, -0.045);
                     logoShape.rotation.set(2.007, 3.14, 3.14);
                     logoShape.scale.set(0.03, 0.02, 0.002);
+                    scene.add(logoShape);
                     break;
 
                 case "square":
@@ -120,6 +122,7 @@
                     logoShape.position.set(0, 0.038, -0.045);
                     logoShape.rotation.set(2.007, 3.14, 3.14);
                     logoShape.scale.set(0.04, 0.04, 0.001);
+                    scene.add(logoShape);
                     break;
 
                 case "rectangle":
@@ -136,15 +139,12 @@
                     logoShape.position.set(0, 0.038, -0.045);
                     logoShape.rotation.set(2.007, 3.14, 3.14);
                     logoShape.scale.set(0.05, 0.03, 0.001);
+                    scene.add(logoShape);
                     break;
+                    
                 default:
                     break;
             }
-
-            // new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(donutLogo), transparent: true, opacity: 1, }),
-            // new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(donutLogo) }),
-            
-            scene.add(logoShape);
         }
 
         const loadTopping = (topping, scale = [1, 1, 1], colors = false) => {
