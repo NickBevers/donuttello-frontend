@@ -116,6 +116,7 @@
         border-radius: var(--border-radius);
         display: grid;
         place-items: center;
+        cursor: pointer;
     }
 
     .configurator__status--error{
@@ -131,7 +132,7 @@
     .donut__count{
         position: absolute;
         top: 7em;
-        left: 45em;
+        left: 33%;
         display: flex;
         flex-direction: column;
         justify-content: center;
