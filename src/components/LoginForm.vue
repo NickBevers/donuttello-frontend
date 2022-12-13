@@ -38,7 +38,7 @@
                 setTimeout(() => {
                     loginErrorStatus.value = null;
                     loginErrorMessage.value = '';
-                }, 5000);
+                }, 7000);
             }
         });
 
