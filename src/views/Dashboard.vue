@@ -30,6 +30,24 @@
     */
 
     if(!jwtToken.value) { router.push('/login'); }
+    if(!new RegExp(/^[A-Za-z0-9-_]*\.[A-Za-z0-9-_]*\.[A-Za-z0-9-_]*$/).test(jwtToken.value)){ router.push('/login');}
+
+    // fetch auth
+    fetch(`https://donuttello-backend.onrender.com/api/v1/users/auth`, {
+        method: "GET",
+        headers: {
+            // "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${jwtToken.value}`
+        }
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        if (data.status !== "success") {
+            router.push('/login');
+        }
+    });
+
     const getDonuts = () => {
         fetch(`https://donuttello-backend.onrender.com/api/v1/donuts?filter=${filter.value}`, {
             method: "GET",

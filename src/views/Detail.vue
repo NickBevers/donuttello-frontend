@@ -1,12 +1,32 @@
 <script setup>
 
-    import { reactive, computed } from 'vue'
+    import { reactive, ref, computed } from 'vue'
     import Navigation from '../components/Navigation.vue';
     import DetailCanvas from '../components/DetailCanvas.vue';
     import DetailSidebar from '../components/DetailSidebar.vue';
     const donutId = window.location.href.split('/').pop();
 
     let donut = reactive({ data: {} });
+    let isAdmin = ref(false);
+
+    // fetch auth
+    fetch(`https://donuttello-backend.onrender.com/api/v1/users/auth`, {
+        method: "GET",
+        headers: {
+            // "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("jwtToken")
+        }
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        if (data.status === "success") {
+                isAdmin.value = true;
+        } else {
+            console.log("something went wrong, please try again");
+            // console.log(data);
+        }
+    });
 
     
     fetch(`https://donuttello-backend.onrender.com/api/v1/donuts/${donutId}`, {
@@ -67,7 +87,7 @@
             </div>
         </div>
 
-        <div class="statusBtn__container">
+        <div class="statusBtn__container" v-if="isAdmin">
             <a class="statusBtn btn--production" @click="changeStatus( `inProduction`)" v-if="donut.data.orderStatus==='ordered'">Bestelling is in productie</a>
             <a class="statusBtn btn--production disabled" v-else>Bestelling is in productie</a>
             <a class="statusBtn btn--done" @click="changeStatus(`produced`)">Bestelling is klaar</a>
