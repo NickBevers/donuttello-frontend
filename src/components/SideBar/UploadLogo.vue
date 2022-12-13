@@ -25,6 +25,7 @@
         .then((data) => {
             // console.log(data);
             setImage(data.secure_url);
+            document.querySelector(".input__file__label").innerHTML = file.name;
         });
     };
 

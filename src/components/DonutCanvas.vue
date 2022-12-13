@@ -29,7 +29,7 @@ import twixModel from "../assets/models/compressed/twix.glb";
 const loader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();
 const donutStore = useDonutStore();
-const { glazeColor, comment, toppings, logo } = storeToRefs(donutStore);
+const { glazeColor, comment, toppings, logo, logoShape } = storeToRefs(donutStore);
 const color = ref("");
 const topping = ref("");
 const text = ref("");
@@ -175,24 +175,24 @@ onMounted(() => {
     dracoLoader.setDecoderPath('/node_modules/three/examples/js/libs/draco/');
     loader.setDRACOLoader(dracoLoader);
 
-    const logoTexture = [
-        new THREE.MeshBasicMaterial({ color: 0xf5f5f5 }),
-        new THREE.MeshBasicMaterial({ color: 0xf5f5f5 }),
-        new THREE.MeshBasicMaterial({ color: 0xf5f5f5 }),
-        // new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( donutLogo ), transparent: true, opacity: 1, }),
-        new THREE.MeshBasicMaterial({ color: 0xf5f5f5 }),
-        // ↓ FRONT OF THE BOX ↓
-        new THREE.MeshBasicMaterial({ color: 0xf5f5f5 }),
-        new THREE.MeshBasicMaterial({ color: 0xf5f5f5 }),
-    ];
+    // const logoTexture = [
+    //     new THREE.MeshBasicMaterial({ color: 0xf5f5f5 }),
+    //     new THREE.MeshBasicMaterial({ color: 0xf5f5f5 }),
+    //     new THREE.MeshBasicMaterial({ color: 0xf5f5f5 }),
+    //     // new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( donutLogo ), transparent: true, opacity: 1, }),
+    //     new THREE.MeshBasicMaterial({ color: 0xf5f5f5 }),
+    //     // ↓ FRONT OF THE BOX ↓
+    //     new THREE.MeshBasicMaterial({ color: 0xf5f5f5 }),
+    //     new THREE.MeshBasicMaterial({ color: 0xf5f5f5 }),
+    // ];
 
-    // Load the donut logo
-    const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
-    const cube = new THREE.Mesh(cubeGeometry, logoTexture);
-    cube.position.set(-0.02, 0.038, -0.04);
-    cube.rotation.set(1.9, 3, 3.5);
-    cube.scale.set(0.05, 0.03, 0.001);
-    scene.add(cube);
+    // // Load the donut logo
+    // const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
+    // const cube = new THREE.Mesh(cubeGeometry, logoTexture);
+    // cube.position.set(-0.02, 0.038, -0.04);
+    // cube.rotation.set(1.9, 3, 3.5);
+    // cube.scale.set(0.05, 0.03, 0.001);
+    // scene.add(cube);
 
     
     // update the topping (hide/show) when changed
@@ -214,6 +214,13 @@ onMounted(() => {
             loadLogo();
         },
     );
+
+    watch(
+        logoShape,
+        (newVal) => {
+            updateShape();
+        },
+    )
 
     //load only the donut model
     const loadDonut = (position = [0, 0, 0], scale = [1, 1, 1], colors = false) => {
@@ -248,8 +255,9 @@ onMounted(() => {
             (gltf) => {
                 const root = gltf.scene;
                 root.traverse((child) => {
-                    if (child.name === "glaze") { child.material.color.set(0xffffff) }
+                    if (child.name === "glaze") { child.material.color.set(0xffebfc) }
                 });
+                root.receiveShadow = true;
                 root.scale.set(...scale);
                 root.position.set(...position);
                 scene.add(root);
@@ -369,6 +377,78 @@ onMounted(() => {
 
         // Show the new topping
         toppingArray[newIndex].variable.visible = true;
+    }
+
+    //update the logo shape
+    const updateShape = () => {
+        let geometry, texture, tempShape;
+        scene.traverse((child) => {
+            if (child.name === "logoShape") { scene.remove(child) }
+        });
+       
+        switch (logoShape.value) {
+            case "circle":
+                geometry = new THREE.CircleGeometry(1, 32);
+                texture = new THREE.MeshBasicMaterial({ color: 0xffffef, side: THREE.DoubleSide });
+                tempShape = new THREE.Mesh(geometry, texture);
+                tempShape.name = "logoShape";
+                tempShape.castShadow = true;
+                tempShape.position.set(-0.02, 0.038, -0.04);
+                tempShape.rotation.set(1.9, 3, 3.5);
+                tempShape.scale.set(0.025, 0.025, 0.002);
+                break;
+
+            case "oval":
+                geometry = new THREE.CircleGeometry(1, 32);
+                texture = new THREE.MeshBasicMaterial({ color: 0xffffef, side: THREE.DoubleSide });
+                tempShape = new THREE.Mesh(geometry, texture);
+                tempShape.name = "logoShape";
+                tempShape.castShadow = true;
+                tempShape.position.set(-0.02, 0.038, -0.04);
+                tempShape.rotation.set(1.9, 3, 3.5);
+                tempShape.scale.set(0.03, 0.02, 0.002);
+                break;
+
+            case "square":
+                geometry = new THREE.BoxGeometry(1, 1, 1);
+                texture = [
+                    new THREE.MeshBasicMaterial({ color: 0xffffef }),
+                    new THREE.MeshBasicMaterial({ color: 0xffffef }),
+                    new THREE.MeshBasicMaterial({ color: 0xffffef }),
+                    new THREE.MeshBasicMaterial({ color: 0xffffef }),
+                    new THREE.MeshBasicMaterial({ color: 0xffffef }),
+                    new THREE.MeshBasicMaterial({ color: 0xffffef }),
+                ];
+                tempShape = new THREE.Mesh(geometry, texture);
+                tempShape.name = "logoShape";
+                tempShape.castShadow = true;
+                tempShape.position.set(-0.02, 0.038, -0.04);
+                tempShape.rotation.set(1.9, 3, 3.5);
+                tempShape.scale.set(0.04, 0.04, 0.001);
+                break;
+
+            case "rectangle":
+                geometry = new THREE.BoxGeometry(1, 1, 1);
+                texture = [
+                    new THREE.MeshBasicMaterial({ color: 0xffffef }),
+                    new THREE.MeshBasicMaterial({ color: 0xffffef }),
+                    new THREE.MeshBasicMaterial({ color: 0xffffef }),
+                    new THREE.MeshBasicMaterial({ color: 0xffffef }),
+                    new THREE.MeshBasicMaterial({ color: 0xffffef }),
+                    new THREE.MeshBasicMaterial({ color: 0xffffef }),
+                ];
+                tempShape = new THREE.Mesh(geometry, texture);
+                tempShape.name = "logoShape";
+                tempShape.castShadow = true;
+                tempShape.position.set(-0.02, 0.038, -0.04);
+                tempShape.rotation.set(1.9, 3, 3.5);
+                tempShape.scale.set(0.05, 0.03, 0.001);
+                break;
+            default:
+                break;
+        }
+
+        scene.add(tempShape);
     }
 
     // load toppings

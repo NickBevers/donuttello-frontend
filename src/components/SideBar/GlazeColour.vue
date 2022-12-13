@@ -5,7 +5,7 @@
 
     const donutStore = useDonutStore();
     const checked = ref(false);
-    const color = ref('#ffffff');
+    const color = ref('#ffebfc');
 
     function updateColor (e) {
         color.value = e.cssColor;

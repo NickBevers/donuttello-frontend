@@ -3,13 +3,17 @@ import { defineStore } from "pinia";
 export const useDonutStore = defineStore({
     id: "donut",
     state: () => ({
-        glazeColor: "#ffffff",
+        glazeColor: "#ffebfc",
         toppings: 'none',
         sprinkles: 'none',
-        logoShape: 'rectangle',
+        logoShape: '',
         comment: '',
         filling: 'none',
         logo: '',
+        donutName: '',
+        companyName: '',
+        email: '',
+        phone: '',
     }),
     getters: {
         getGlazeColor() {
@@ -32,6 +36,18 @@ export const useDonutStore = defineStore({
         },
         getLogo() {
             return this.logo;
+        },
+        getDonutName() {
+            return this.donutName;
+        },
+        getCompanyName() {
+            return this.companyName;
+        },
+        getEmail() {
+            return this.email;
+        },
+        getPhone() {
+            return this.phone;
         }
     },
     actions: {
@@ -55,6 +71,18 @@ export const useDonutStore = defineStore({
         },
         setLogo(logo) {
             this.logo = logo;
+        },
+        setDonutName(donutName) {
+            this.donutName = donutName;
+        },
+        setCompanyName(companyName) {
+            this.companyName = companyName;
+        },
+        setEmail(email) {
+            this.email = email;
+        },
+        setPhone(phone) {
+            this.phone = phone;
         }
     }
 });

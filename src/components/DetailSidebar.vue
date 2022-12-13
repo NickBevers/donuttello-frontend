@@ -52,7 +52,7 @@
             
             <li class="detailSidebar__item item--sprinkles">
                 <span class="item__label">Sprinkles: </span>
-                <span class="item__value">{{sprinkles.split(" ")[1]}}</span>
+                <span class="item__value">{{sprinkles.split(" ")[1] || "Geen sprinkles"}}</span>
             </li>
             
             <li class="detailSidebar__item item--topping">

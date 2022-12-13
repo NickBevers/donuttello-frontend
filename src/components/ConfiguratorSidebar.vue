@@ -7,19 +7,25 @@
     import UploadLogo from './SideBar/UploadLogo.vue';
     import LogoShape from './SideBar/LogoShape.vue';
     import CommentField from './SideBar/CommentField.vue';
+    import userData from './SideBar/userData.vue';
     import { useDonutStore } from '../stores/donutConf.js';
     const donutStore = useDonutStore();
-    const { glazeColor, toppings, sprinkles, logoShape, comment, filling } = storeToRefs(donutStore);
+    const { glazeColor, toppings, sprinkles, logoShape, logo, comment, filling, donutName, companyName, email, phone } = storeToRefs(donutStore);
 
     const emit = defineEmits(['createDonut']);
     const createDonut = () => {
         emit("createDonut", {
             filling: tempFilling.value,
-            glazeColor: tempColor.value,
-            toppings: tempTopping.value,
-            sprinkles: tempSprinkles.value,
+            glaze: tempColor.value,
+            topping2: tempTopping.value,
+            topping1: tempSprinkles.value,
             logoShape: tempShape.value,
-            comment: tempComment.value
+            comment: tempComment.value,
+            logo: logo.value,
+            name: tempDonutName.value,
+            company: tempCompanyName.value,
+            email: tempEmail.value,
+            phone: tempPhone.value
         });
     }
 
@@ -27,8 +33,14 @@
     const tempColor = ref("#ffffff");
     const tempTopping = ref("none");
     const tempSprinkles = ref("none");
+    const tempLogo = ref("");
     const tempShape = ref("rectangle");
     const tempComment = ref("");
+    const tempDonutName = ref("");
+    const tempCompanyName = ref("");
+    const tempEmail = ref("");
+    const tempPhone = ref("");
+
 
     watch(filling, (value) => {
         tempFilling.value = value;
@@ -46,12 +58,32 @@
         tempTopping.value = value;
     });
 
+    watch(logo, (value) => {
+        tempLogo.value = value;
+    });
+
     watch(logoShape, (value) => {
         tempShape.value = value;
     });
 
     watch(comment, (value) => {
         tempComment.value = value;
+    });
+
+    watch(donutName, (value) => {
+        tempDonutName.value = value;
+    });
+
+    watch(companyName, (value) => {
+        tempCompanyName.value = value;
+    });
+
+    watch(email, (value) => {
+        tempEmail.value = value;
+    });
+
+    watch(phone, (value) => {
+        tempPhone.value = value;
     });
 
 
@@ -63,9 +95,10 @@
         <FillingList />
         <GlazeColour />
         <Toppings />
-        <UploadLogo />
         <LogoShape />
+        <UploadLogo />
         <CommentField />
+        <userData />
 
         <div class="confSidebar__create_donut">
             <a class="confSidebar__button--create" @click="createDonut">Submit</a>

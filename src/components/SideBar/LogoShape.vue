@@ -1,16 +1,43 @@
 <script setup>
-    import { ref } from "vue";
+    import { ref, watch } from "vue";
     import { useDonutStore } from "../../stores/donutConf";
-    let logoShape = ref("Geen");
+    let logoShape = ref("");
     const donutStore = useDonutStore();
     const shapes = ref([ "Vierkant", "Cirkel", "Rechthoek", "Ovaal" ]);
 
     const checked = ref(false);
 
     function selectShape(shape) {
-        logoShape.value = shape;
+        switch (shape) {
+            case "Vierkant":
+                logoShape.value = "square";
+                break;
+            case "Cirkel":
+                logoShape.value = "circle";
+                break;
+            case "Rechthoek":
+                logoShape.value = "rectangle";
+                break;
+            case "Ovaal":
+                logoShape.value = "oval";
+                break;
+        }
         donutStore.setLogoShape(logoShape.value);
     }
+
+    function translate(shape) {
+        switch (shape) {
+            case "Vierkant":
+                return "square";
+            case "Cirkel":
+                return "circle";
+            case "Rechthoek":
+                return "rectangle";
+            case "Ovaal":
+                return "oval";
+        }
+    }
+
 </script>
 <template>
   <div class="confSidebar__item">
@@ -21,7 +48,7 @@
 
     <section v-if="checked" class="confSidebar__item__section">
       <ul class="confSidebar__item__section--listing">
-        <li v-for="shape in shapes" :class="{ 'active' : shape === logoShape }" class="listing__item" :key="shape.name" @click="selectShape(shape)"> {{ shape }} </li>
+        <li v-for="shape in shapes" :class="{ 'active' : translate(shape) === logoShape }" class="listing__item" :key="shape.name" @click="selectShape(shape)"> {{ shape }} </li>
       </ul>
     </section>
   </div>
