@@ -36,8 +36,6 @@
         });
     }
 
-
-
     function copyLink(){
         navigator.clipboard.writeText(donutLink.value);
         status.value = "Link copied to clipboard.";
