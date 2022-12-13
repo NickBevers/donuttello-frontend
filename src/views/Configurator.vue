@@ -17,14 +17,20 @@
         console.log(donut.email);
         console.log(donut.phone);
 
-        /* 
-            filling: tempFilling.value,
-            glazeColor: tempColor.value,
-            toppings: tempTopping.value,
-            sprinkles: tempSprinkles.value,
-            logoShape: tempShape.value,
-            comment: tempComment.value
-        */
+        fetch("https://donuttello-backend.onrender.com/api/v1/donuts",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(donut)
+            }
+        )
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            console.log(data.url);
+        });
     }
 
 </script>

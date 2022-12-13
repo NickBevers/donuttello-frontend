@@ -1,5 +1,6 @@
 <script setup>
     import { ref } from 'vue';
+    import router from '../router';
   
     const email = ref('');
     const passwordOld = ref('');
@@ -30,7 +31,8 @@
                 passwordOld.value = "";
                 passwordNew.value = "";
                 showPassword.value = false;
-                location.href = "/dashboard";
+                router.push("/dashboard");
+                // location.href = "/dashboard";
             } else {
                 loginErrorStatus.value = data.status;
                 loginErrorMessage.value = data.message;

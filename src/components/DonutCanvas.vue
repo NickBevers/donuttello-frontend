@@ -171,8 +171,8 @@ onMounted(() => {
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     const controls = new OrbitControls(camera, renderer.domElement);
     dracoLoader.setDecoderConfig({ type: 'js' });
-    // dracoLoader.setDecoderPath( 'https://www.gstatic.com/draco/v1/decoders/' );
-    dracoLoader.setDecoderPath('/node_modules/three/examples/js/libs/draco/');
+    dracoLoader.setDecoderPath( 'https://www.gstatic.com/draco/v1/decoders/' );
+    // dracoLoader.setDecoderPath('/node_modules/three/examples/js/libs/draco/');
     loader.setDRACOLoader(dracoLoader);
 
     // const logoTexture = [

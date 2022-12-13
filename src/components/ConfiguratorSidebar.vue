@@ -7,13 +7,18 @@
     import UploadLogo from './SideBar/UploadLogo.vue';
     import LogoShape from './SideBar/LogoShape.vue';
     import CommentField from './SideBar/CommentField.vue';
-    import userData from './SideBar/userData.vue';
+    import userData from './SideBar/UserData.vue';
     import { useDonutStore } from '../stores/donutConf.js';
     const donutStore = useDonutStore();
     const { glazeColor, toppings, sprinkles, logoShape, logo, comment, filling, donutName, companyName, email, phone } = storeToRefs(donutStore);
 
     const emit = defineEmits(['createDonut']);
     const createDonut = () => {
+        // check for missing fields
+        // show error message
+        // if all fields are filled, emit event
+
+
         emit("createDonut", {
             filling: tempFilling.value,
             glaze: tempColor.value,

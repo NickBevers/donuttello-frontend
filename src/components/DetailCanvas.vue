@@ -46,8 +46,8 @@
         const camera = new THREE.PerspectiveCamera(50, domElement.offsetWidth / domElement.offsetHeight, 0.01, 1000);
         const controls = new OrbitControls(camera, renderer.domElement);
         dracoLoader.setDecoderConfig({ type: 'js' });
-        // dracoLoader.setDecoderPath( 'https://www.gstatic.com/draco/v1/decoders/' );
-        dracoLoader.setDecoderPath('/node_modules/three/examples/js/libs/draco/');
+        dracoLoader.setDecoderPath( 'https://www.gstatic.com/draco/v1/decoders/' );
+        // dracoLoader.setDecoderPath('/node_modules/three/examples/js/libs/draco/');
         loader.setDRACOLoader(dracoLoader);
 
         watch(detailProps, () => {
@@ -61,6 +61,10 @@
                     loadLogo();
                 }
 
+                if(detailData.topping1 !== "none"){
+                    loadSprinkles();
+                }
+
                 if(!glaze){
                     setTimeout(() => {
                         glaze.traverse((child) => {
@@ -68,23 +72,11 @@
                                 child.material.color.set(detailData.glaze)
                             }
                         });
-
-                        sprinkles.traverse((child) => {
-                            if (child.name === "sprinkles") {
-                                child.material.color.set(detailData.topping1.split(" ")[1]);
-                            }
-                        });
                     }, 1000);
                 } else{
                     glaze.traverse((child) => {
                         if (child.name === "glaze") {
                             child.material.color.set(detailData.glaze)
-                        }
-                    });
-
-                    sprinkles.traverse((child) => {
-                        if (child.name === "sprinkles") {
-                            child.material.color.set(detailData.topping1.split(" ")[1]);
                         }
                     });
                 }
@@ -350,7 +342,9 @@
                 (gltf) => {
                     sprinkles = gltf.scene;
                     sprinkles.traverse((child) => {
-                        if (child.name === "sprinkles") { child.material.color.set("#ffffff") }
+                        if (child.name === "sprinkles") {
+                            child.material.color.set(detailData.topping1.split(" ")[1]);
+                        }
                     });
                     sprinkles.scale.set(...scale);
                     sprinkles.position.set(...position);
@@ -399,7 +393,6 @@
         // Calling the functions
         loadDonut();
         loadGlaze();
-        loadSprinkles();
         animate();
 
     })

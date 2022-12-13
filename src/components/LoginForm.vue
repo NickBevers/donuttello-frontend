@@ -1,6 +1,7 @@
 <script setup>
     import { ref } from 'vue';
     import { login } from '../assets/functions/login';
+    import router from '../router';
   
     const username = ref('');
     const password = ref('');
@@ -27,7 +28,10 @@
                 username.value = "";
                 password.value = "";
                 showPassword.value = false;
-                location.href = "/dashboard";
+                // vue router link to dashboard
+                router.push("/dashboard");
+
+                // location.href = "/dashboard";
             } else {
                 loginErrorStatus.value = data.status;
                 loginErrorMessage.value = data.message;

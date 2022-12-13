@@ -13,7 +13,7 @@
             </p>
 
             <div class="button__container">
-                <a href="/configurator" class="button__text">Creëer je eigen donut</a>
+                <router-link exact to="/configurator"><a class="button__text">Creëer je eigen donut</a></router-link>
             </div>
         </section>
     </div>

@@ -2,6 +2,7 @@
     import { onMounted, onBeforeMount, ref } from 'vue'
     import Navigation from '../components/Navigation.vue';
     import DonutCard from '../components/Dashboard/DonutCard.vue';
+    import router from '../router';
 
     const jwtToken = ref(localStorage.getItem('jwtToken'));
     const donuts = ref([]);
@@ -28,7 +29,7 @@
 
     */
 
-    if(!jwtToken.value) { window.location.href = '/login'; }
+    if(!jwtToken.value) { router.push('/login'); }
     const getDonuts = () => {
         fetch(`https://donuttello-backend.onrender.com/api/v1/donuts?filter=${filter.value}`, {
             method: "GET",
@@ -55,6 +56,10 @@
         let canvas = document.getElementsByTagName('canvas');
         while (canvas[0]) canvas[0].parentNode.removeChild(canvas[0]);
     })
+
+    function routeDetail(id) {
+        router.push(`/detail/${id}`);
+    }
 </script>
 
 <template>
@@ -81,7 +86,7 @@
 
                 <div class="donut__card__container">
                     <div v-for="donut in donuts" :key="donut._id" class="donut__card">
-                        <a :href="'/detail/' + donut._id" ><DonutCard :donut="donut" /></a>
+                        <a @click="routeDetail(donut._id)" ><DonutCard :donut="donut" /></a>
                     </div>
                 </div>
             </div>
@@ -140,5 +145,8 @@
         justify-content: center;
         gap: 1.5em;
         margin-top: var(--margin-xxxlarge);
+    }
+    a{
+        cursor: pointer;
     }
 </style>

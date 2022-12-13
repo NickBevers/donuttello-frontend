@@ -1,4 +1,7 @@
+import router from '../router';
+
 export function logout() {
     localStorage.removeItem('jwtToken');
-    window.location.href = '/login';
+    router.push('/login');
+    // window.location.href = '/login';
 }
