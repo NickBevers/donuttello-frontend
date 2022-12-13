@@ -73,4 +73,23 @@
     .confSidebar__item__checkbox:checked{
         transform: rotate(-180deg);
     }
+
+    .userdata__container{
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    label{
+        margin-bottom: -0.5em;
+        font-weight: var(--font-weight--semi-bold);
+    }
+
+    input[type="text"], input[type="email"]{
+        padding: 0.5em;
+        border: 1px solid #000;
+        border-radius: 0.25em;
+        margin-bottom: 1em;
+        height: 2em;
+    }
 </style>
