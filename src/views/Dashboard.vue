@@ -79,7 +79,7 @@
     <div class="home">
         <Navigation />
         <div class="dashboard__container">
-            <div class="filter__container">
+            <!-- <div class="filter__container">
                 <div class="filter">
                     <label for="filter" class="filter__label">Wat te tonen: </label>
                     <select name="filter" class="filter__input" id="filter" v-model="filter" v-on:change="getDonuts">
@@ -88,7 +88,7 @@
                         <option value="notOrder">Creaties</option>
                     </select>
                 </div>
-            </div>
+            </div> -->
 
             <div class="donuts__container">
                 <div class="donuts__container__title">

@@ -45,6 +45,11 @@
                 <span class="item__value">{{detailData.name}}</span>
             </li>
 
+            <li class="detailSidebar__item item--amount">
+                <span class="item__label">Amount:</span>
+                <span class="item__value">{{detailData.amount}}</span>
+            </li>
+
             <li class="detailSidebar__item item--filling">
                 <span class="item__label">Filling:</span>
                 <span class="item__value">{{detailData.filling}}</span>
