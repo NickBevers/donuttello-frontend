@@ -134,6 +134,11 @@
         margin-right: 0.5em;
     }
 
+    .donut__card__mail__link:hover{
+        cursor: pointer;
+        color: var(--yellow--main);
+    }
+
     .donut__card__remove{
         position: absolute;
         bottom: 60px;

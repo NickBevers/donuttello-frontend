@@ -8,27 +8,7 @@
     const donuts = ref([]);
     const filter = ref('order');
     const isAdmin = ref(false);
-
-    /*
-
-    function sorting() {
-  switch (filter.value) {
-    case "votes-high-to-low":
-      donuts.donuts.sort((a, b) => (b.votes > a.votes ? 1 : -1));
-      break;
-    case "votes-low-to-high":
-      donuts.donuts.sort((a, b) => (b.votes < a.votes ? 1 : -1));
-      break;
-    case "date-new-to-old":
-      donuts.donuts.sort((a, b) => new Date(b.date) > new Date(a.date) ? 1 : -1 );
-      break;
-    case "date-old-to-new":
-      donuts.donuts.sort((a, b) => new Date(b.date) < new Date(a.date) ? 1 : -1 );
-      break;
-  }
-}
-
-    */
+    const removeMessage = ref("");
 
     if(!jwtToken.value) { router.push('/login'); }
     if(!new RegExp(/^[A-Za-z0-9-_]*\.[A-Za-z0-9-_]*\.[A-Za-z0-9-_]*$/).test(jwtToken.value)){ router.push('/login');}
@@ -82,6 +62,17 @@
     function routeDetail(id) {
         router.push(`/detail/${id}`);
     }
+
+    function removeDonut(){
+        getDonuts();
+        removeMessage.value = "The donut has been removed.";
+        setTimeout(() => {
+            removeMessage.value = "";
+        }, 4000);
+
+    }
+
+
 </script>
 
 <template>
@@ -108,11 +99,14 @@
 
                 <div class="donut__card__container">
                     <div v-for="donut in donuts" :key="donut._id" class="donut__card">
-                        <a @click="routeDetail(donut._id)" ><DonutCard :donut="donut" @removeDonut="getDonuts"/></a>
-                        
+                        <a @click="routeDetail(donut._id)" ><DonutCard :donut="donut" @removeDonut="removeDonut"/></a>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="removeStatus" @click="copyLink" v-if="removeMessage.length > 2">
+            <p class="removeStatus__message" :innerHTML="removeMessage"></p>
         </div>
     </div>
 </template>
@@ -172,5 +166,23 @@
     
     a{
         cursor: pointer;
+    }
+
+    .removeStatus{
+        background-color: var(--green);
+        width: 70ch;
+        height: 3em;
+        position: absolute;
+        top: 8em;
+        left: calc(50% - 35ch);
+        border-radius: var(--border-radius);
+        display: grid;
+        place-items: center;
+    }
+
+    .removeStatus__message{
+        color: var(--white);
+        font-size: var(--font-size--medium);
+        text-align: center;
     }
 </style>
