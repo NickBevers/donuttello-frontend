@@ -1,11 +1,56 @@
 <script setup>
-    import { onMounted } from 'vue';
+    import { ref, watch } from 'vue';
+    import router from '../../router';
+    const isAdmin = ref(false);
+
     const props = defineProps({
         donut: {
             type: Object,
             required: true
         }
+    });
+
+    const emit = defineEmits(['removeDonut']);
+
+    fetch(`https://donuttello-backend.onrender.com/api/v1/users/auth`, {
+        method: "GET",
+        headers: {
+            // "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("jwtToken")}`
+        }
     })
+    .then((response) => response.json())
+    .then((data) => {
+        if (data.status !== "success") {
+            router.push('/login');
+        } else {
+            // console.log(data);
+            isAdmin.value = true;
+        }
+    });
+
+
+    const removeDonut = () => {
+        fetch(`https://donuttello-backend.onrender.com/api/v1/donuts/${props.donut._id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("jwtToken")}`
+            }
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.status === "success") {
+                console.log(data);
+                emit('removeDonut');
+            } else {
+                console.log("something went wrong, please try again");
+                // console.log(data);
+            }
+        });
+    }
+
 </script>
 
 <template>
@@ -19,16 +64,12 @@
         </div>
 
         <div class="donut__card__mail">
-            <a :href="'mailto:' + donut.email" class="donut__card__mail__link"><font-awesome-icon icon="fa-solid fa-envelope" /></a>
+            <a :href="'mailto:' + donut.email" @click.stop="" class="donut__card__mail__link"><font-awesome-icon icon="fa-solid fa-envelope" /></a>
         </div>
 
-        <!-- <div class="donut__card__actions">
-            <select name="donutActions" id="donutActions" class="filter__input">
-                <option value="hello" selected hidden> ⛭ </option>
-                <option value="edit">Bewerken</option>
-                <option value="delete">Verwijderen</option>
-            </select>
-        </div> -->
+        <div class="donut__card__remove" v-if="isAdmin" @click.stop="removeDonut">
+            <font-awesome-icon icon="fa-solid fa-trash" />
+        </div>
     </div>
         
 </template>
@@ -91,6 +132,26 @@
         height: 30px;
         margin-bottom: 0.5em;
         margin-right: 0.5em;
+    }
+
+    .donut__card__remove{
+        position: absolute;
+        bottom: 60px;
+        right: -7px;
+        width: 30px;
+        height: 30px;
+        /* border-radius: 50%; */
+        /* background-color: var(--white); */
+        margin-top: 0.5em;
+        margin-right: 0.5em;
+        color: var(--pink--main);
+        font-size: var(--font-size--medium);
+        z-index: 5;
+    }
+
+    .donut__card__remove:hover{
+        cursor: pointer;
+        color: var(--yellow--main);
     }
 
     .donut__card__mail__link{

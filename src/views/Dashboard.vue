@@ -7,6 +7,7 @@
     const jwtToken = ref(localStorage.getItem('jwtToken'));
     const donuts = ref([]);
     const filter = ref('order');
+    const isAdmin = ref(false);
 
     /*
 
@@ -45,6 +46,9 @@
     .then((data) => {
         if (data.status !== "success") {
             router.push('/login');
+        } else {
+            // console.log(data);
+            isAdmin.value = true;
         }
     });
 
@@ -104,7 +108,8 @@
 
                 <div class="donut__card__container">
                     <div v-for="donut in donuts" :key="donut._id" class="donut__card">
-                        <a @click="routeDetail(donut._id)" ><DonutCard :donut="donut" /></a>
+                        <a @click="routeDetail(donut._id)" ><DonutCard :donut="donut" @removeDonut="getDonuts"/></a>
+                        
                     </div>
                 </div>
             </div>
@@ -164,6 +169,7 @@
         gap: 1.5em;
         margin-top: var(--margin-xxxlarge);
     }
+    
     a{
         cursor: pointer;
     }
