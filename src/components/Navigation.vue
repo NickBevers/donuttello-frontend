@@ -33,7 +33,8 @@
                 <router-link v-if="isAdmin" class="navigation__item" exact to="/dashboard"><a>Dashboard</a></router-link>
                 <router-link class="navigation__item" exact to="/configurator"><a>Configurator</a></router-link>
                 <router-link v-if="isAdmin" class="navigation__item" exact to="/forgot-password"><a>Wijzig Paswoord</a></router-link>
-                <router-link class="navigation__item navigation__item--icon" to="/login"><font-awesome-icon icon="fa-solid fa-user" /></router-link>
+                <router-link v-if="!isAdmin" class="navigation__item navigation__item--icon" to="/login"><font-awesome-icon icon="fa-solid fa-user" /></router-link>
+                <router-link v-else class="navigation__item navigation__item--icon" to="/dashboard"><font-awesome-icon icon="fa-solid fa-user" /></router-link>
             </div>
         </div>
     </nav>
