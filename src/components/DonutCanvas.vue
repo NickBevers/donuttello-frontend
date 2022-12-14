@@ -331,11 +331,12 @@ onMounted(() => {
         scene.add(image);
     }
 
-    // Setting up the lights
-    const ambientLight = new THREE.AmbientLight(0xffffff,  1);
-    ambientLight.name = "ambientLight";
-    // ambientLight.position.set(0, 10, 0);
-    scene.add(ambientLight);
+    // set up the rectAreLight
+    const rectAreaLight = new THREE.RectAreaLight(0xffffff, 1, 10, 10);
+    rectAreaLight.position.set(0, 0.5, 0);
+    rectAreaLight.lookAt(0, 0, 0);
+    rectAreaLight.name = "rectAreaLight";
+    scene.add(rectAreaLight);
 
 
     // Setting up the camera
