@@ -20,6 +20,13 @@
             }
         });
     }
+
+    
+    function logout() {
+        localStorage.removeItem('jwtToken');
+        isAdmin.value = false;
+        router.push('/');
+    }
 </script>
 
 <template>
@@ -37,9 +44,26 @@
                 <router-link v-else class="navigation__item navigation__item--icon" to="/dashboard"><font-awesome-icon icon="fa-solid fa-user" /></router-link>
             </div>
         </div>
+
+        <div class="navigation__logout" v-if="isAdmin">
+            <a class="logout" @click="logout">Logout</a>
+        </div>
     </nav>
 </template>
 
 <style scoped>
+    .navigation__logout {
+        position: absolute;
+        font-size: var(--font-size--small);
+        font-family: var(--font--family--primary);
+        font-weight: var(--font-weight--bold);
+        text-transform: uppercase;
+        right: 3em;
+        top: calc((4.7em - var(--font-size--small)) / 2);
+        cursor: pointer;
+    }
 
+    .logout {
+        color: var( --yellow--main);
+    }
 </style>
