@@ -1,6 +1,6 @@
 <script setup>
     import { ref } from 'vue'
-    import router from '../../router'
+    import router from '../router'
     const isAdmin = ref(false);
     const jwtToken = ref(localStorage.getItem('jwtToken'));
     
