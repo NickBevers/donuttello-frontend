@@ -1,14 +1,17 @@
 <script setup>
     import { onMounted, onBeforeMount, ref } from 'vue'
     import Navigation from '../components/Navigation.vue';
+    import DashboardSidebar from '../components/Dashboard/DashboardSidebar.vue';
     import DonutCard from '../components/Dashboard/DonutCard.vue';
     import router from '../router';
 
     const jwtToken = ref(localStorage.getItem('jwtToken'));
     const donuts = ref([]);
-    const filter = ref('order');
+    const filter = ref('all');
+    const donutFilter = ref('');
     const isAdmin = ref(false);
-    const removeMessage = ref("");
+    const removeMessage = ref('');
+    const confirm = ref('');
 
     if(!jwtToken.value) { router.push('/login'); }
     if(!new RegExp(/^[A-Za-z0-9-_]*\.[A-Za-z0-9-_]*\.[A-Za-z0-9-_]*$/).test(jwtToken.value)){ router.push('/login');}
@@ -33,7 +36,7 @@
     });
 
     const getDonuts = () => {
-        fetch(`https://donuttello-backend.onrender.com/api/v1/donuts?filter=${filter.value}`, {
+        fetch(`https://donuttello-backend.onrender.com/api/v1/donuts?filter=${donutFilter.value}`, {
             method: "GET",
             headers: {
                 // "Access-Control-Allow-Origin": "*",
@@ -64,12 +67,51 @@
     }
 
     function removeDonut(){
-        getDonuts();
-        removeMessage.value = "The donut has been removed.";
-        setTimeout(() => {
-            removeMessage.value = "";
-        }, 4000);
+        fetch(`https://donuttello-backend.onrender.com/api/v1/donuts/${props.donut._id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("jwtToken")}`
+            }
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.status === "success") {
+                getDonuts();
+                removeMessage.value = "The donut has been removed.";
+                setTimeout(() => {
+                    removeMessage.value = "";
+                }, 4000);
+            } else {
+                console.log("something went wrong, please try again");
+                // console.log(data);
+            }
+        });
+    }
 
+    function changeFilter() {
+        switch (filter.value) {
+            case 'all':
+                donutFilter.value = '';
+                break;
+            case 'ordered':
+                donutFilter.value = 'ordered';
+                break;
+            case 'inProduction':
+                donutFilter.value = 'inProduction';
+                break;
+            case 'produced':
+                donutFilter.value = 'produced';
+                break;
+            default:
+                donutFilter.value = '';
+                break;
+        }
+        getDonuts();
+    }
+
+    function confirmRemove() {
+        confirm.value = "Are you sure you want to remove this donut?";
     }
 
 
@@ -79,28 +121,42 @@
     <div class="home">
         <Navigation />
         <div class="dashboard__container">
-            <!-- <div class="filter__container">
+            <div class="filter__container">
                 <div class="filter">
-                    <label for="filter" class="filter__label">Wat te tonen: </label>
-                    <select name="filter" class="filter__input" id="filter" v-model="filter" v-on:change="getDonuts">
-                        <option value="all">Alles</option>
-                        <option value="order" selected>Bestellingen</option>
-                        <option value="notOrder">Creaties</option>
+                    <label for="filter" class="filter__label">Filter: </label>
+                    <select name="filter" class="filter__input" id="filter" v-model="filter" v-on:change="changeFilter()">
+                        <option value="all" selected>Alles</option>
+                        <option value="ordered">Besteld</option>
+                        <option value="inProduction">In production</option>
+                        <option value="produced">Geproduceerd</option>
                     </select>
                 </div>
-            </div> -->
+            </div>
+
+            <DashboardSidebar />
 
             <div class="donuts__container">
                 <div class="donuts__container__title">
                     <h2 v-if="filter == 'all'">Alle Donuts</h2>
-                    <h2 v-else-if="filter == 'order'">Bestellingen</h2>
-                    <h2 v-else>Creaties</h2>
+                    <h2 v-else-if="filter === 'ordered'">Open bestellingen</h2>
+                    <h2 v-else-if="filter === 'inProduction'">In productie</h2>
+                    <h2 v-else>Geproduceerd</h2>
                 </div>
 
                 <div class="donut__card__container">
                     <div v-for="donut in donuts" :key="donut._id" class="donut__card">
-                        <a @click="routeDetail(donut._id)" ><DonutCard :donut="donut" @removeDonut="removeDonut"/></a>
+                        <a @click="routeDetail(donut._id)" ><DonutCard :donut="donut" @removeDonut="removeDonut" @confirmRemove="confirmRemove"/></a>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="confirmRemove__container" v-if="confirm.length > 2">
+            <div class="confirmRemove">
+                <p class="confirmRemove__message" :innerHTML="confirm"></p>
+                <div class="confirmRemove__buttons">
+                    <a class="confirmRemove__button" @click="removeDonut">Yes</a>
+                    <a class="confirmRemove__button" @click="confirm=''">No</a>
                 </div>
             </div>
         </div>
@@ -157,11 +213,13 @@
     }
     .donut__card__container{
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         flex-wrap: wrap;
         justify-content: center;
         gap: 1.5em;
+        margin: 0 auto;
         margin-top: var(--margin-xxxlarge);
+        width: clamp(350px, 65%, 1800px);
     }
     
     a{
@@ -184,5 +242,55 @@
         color: var(--white);
         font-size: var(--font-size--medium);
         text-align: center;
+    }
+
+    .confirmRemove__container{
+        width: 100vw;
+        height: 100vh;
+        z-index: 100;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: grid;
+        place-items: center;
+    }
+
+    .confirmRemove{
+        background-color: var(--white);
+        width: clamp(350px, 40%, 1800px);
+        height: 10em;
+        border-radius: var(--border-radius);
+        display: grid;
+        place-items: center;
+    }
+
+    .confirmRemove__message{
+        font-size: var(--font-size--large);
+        font-weight: var(--font-weight--semi-bold);
+        text-align: center;
+    }
+
+    .confirmRemove__buttons{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 100%;
+    }
+
+    .confirmRemove__button{
+        background-color: var(--pink--main);
+        color: var(--white);
+        padding: 0.5em 1em;
+        border-radius: var(--border-radius);
+        font-size: var(--font-size--medium);
+        font-weight: var(--font-weight--semi-bold);
+        text-align: center;
+        width: 8em;
+        text-transform: uppercase;
+    }
+
+    .confirmRemove__button:hover{
+        color: var(--yellow--main);
     }
 </style>
