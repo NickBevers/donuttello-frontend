@@ -136,7 +136,7 @@
 
     .donut__card__mail__link:hover{
         cursor: pointer;
-        color: var(--yellow--main);
+        color: var(--blue--main);
     }
 
     .donut__card__remove{
@@ -156,7 +156,7 @@
 
     .donut__card__remove:hover{
         cursor: pointer;
-        color: var(--yellow--main);
+        color: var(--blue--main);
     }
 
     .donut__card__mail__link{

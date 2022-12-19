@@ -1,5 +1,5 @@
 <script setup>
-    import { watch, ref, reactive, defineProps, onMounted } from 'vue';
+    import { watch, ref, reactive, onMounted } from 'vue';
     import * as THREE from 'three';
     import { useDonutStore } from "../stores/donutConf.js";
     import { storeToRefs } from "pinia";
@@ -363,10 +363,19 @@
         }
 
 
-        // Setting up the lights
-        const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-        ambientLight.position.set(2, 2, 5);
-        scene.add(ambientLight);
+        // set up the rectAreLight
+        const rectAreaLight = new THREE.RectAreaLight(0xffffff, 1, 15, 15);
+        rectAreaLight.position.set(0, 0.5, 0);
+        rectAreaLight.lookAt(0, 0, 0);
+        rectAreaLight.name = "rectAreaLight";
+        scene.add(rectAreaLight);
+
+        // set up another rectAreLight for the bottom
+        const rectAreaLight2 = new THREE.RectAreaLight(0xffffff, 0.4, 15, 15);
+        rectAreaLight2.position.set(0, -0.1, 0);
+        rectAreaLight2.lookAt(0, 0, 0);
+        rectAreaLight2.name = "rectAreaLight";
+        scene.add(rectAreaLight2);
 
 
         // Setting up the camera

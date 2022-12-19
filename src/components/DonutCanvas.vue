@@ -321,22 +321,25 @@ onMounted(() => {
     const loadLogo = () => {
         const geometry = new THREE.PlaneGeometry(0.04, 0.025);
         const material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(logoUrl.value), side: THREE.DoubleSide, transparent: true, opacity: 1, });
-        const image = new THREE.Mesh(
-            // new THREE.MeshBasicMaterial({ map: new THREE.ImageUtils.loadTexture(detailData.logo) }),
-            geometry,
-            material
-        );
+        const image = new THREE.Mesh( geometry, material );
         image.position.set(-0.02, 0.039, -0.04);
         image.rotation.set(1.9, 3, 3.5);
         scene.add(image);
     }
 
     // set up the rectAreLight
-    const rectAreaLight = new THREE.RectAreaLight(0xffffff, 1, 10, 10);
+    const rectAreaLight = new THREE.RectAreaLight(0xffffff, 1, 15, 15);
     rectAreaLight.position.set(0, 0.5, 0);
     rectAreaLight.lookAt(0, 0, 0);
     rectAreaLight.name = "rectAreaLight";
     scene.add(rectAreaLight);
+
+    // set up another rectAreLight for the bottom
+    const rectAreaLight2 = new THREE.RectAreaLight(0xffffff, 0.4, 15, 15);
+    rectAreaLight2.position.set(0, -0.1, 0);
+    rectAreaLight2.lookAt(0, 0, 0);
+    rectAreaLight2.name = "rectAreaLight";
+    scene.add(rectAreaLight2);
 
 
     // Setting up the camera

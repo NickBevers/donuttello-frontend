@@ -57,6 +57,9 @@
     function copyLink(){
         navigator.clipboard.writeText(donutLink.value);
         status.value = "Link copied to clipboard.";
+        setTimeout(() => {
+            status.value = "";
+        }, 3000);
     }
 
     function updateDonutAmount(){
@@ -170,6 +173,7 @@
     }
 
     .donut__count__input[type=number] {
+        appearance: textfield;
         -moz-appearance: textfield;
     }
 </style>
