@@ -8,9 +8,9 @@ import "./assets/sass/main.scss";
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faUser, faEye, faEyeSlash, faEnvelope, faGear, faTrash, faList, faThLarge, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faEye, faEyeSlash, faEnvelope, faGear, faTrash, faList, faThLarge, faAngleDown, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faUser, faEye, faEyeSlash, faEnvelope, faGear, faTrash, faList, faThLarge, faAngleDown);
+library.add(faUser, faEye, faEyeSlash, faEnvelope, faGear, faTrash, faList, faThLarge, faAngleDown, faChevronLeft);
 //pinia
 const pinia = createPinia()
 

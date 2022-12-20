@@ -170,6 +170,8 @@ onMounted(() => {
     const camera = new THREE.PerspectiveCamera(50, domElement.offsetWidth / domElement.offsetHeight, 0.01, 1000);
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     const controls = new OrbitControls(camera, renderer.domElement);
+    controls.minDistance = 0.15;
+    controls.maxDistance = 1;
     dracoLoader.setDecoderConfig({ type: 'js' });
     dracoLoader.setDecoderPath( 'https://www.gstatic.com/draco/v1/decoders/' );
     // dracoLoader.setDecoderPath('/node_modules/three/examples/js/libs/draco/');

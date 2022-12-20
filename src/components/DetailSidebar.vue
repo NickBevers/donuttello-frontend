@@ -1,6 +1,6 @@
 <script setup>
-
     import { onMounted, ref, reactive, watch } from 'vue';
+    import router from '../router';
     let detailData = reactive( {} );
     let sprinkles = ref('');
     let isAdmin = ref(false);
@@ -38,6 +38,9 @@
 
 <template>
     <div class="detailSidebar">
+        <div class="button__container--back" @click="router.push('/dashboard')">
+            <a class="button--back"><font-awesome-icon class="icon--left" icon="fa-solid fa-chevron-left" />Terug</a>
+        </div>
         <h2 class="detailSidebar__title">Orderdetail</h2>
         <ul class="detailSidebar__items">
             <li class="detailSidebar__item item--name">
@@ -87,7 +90,7 @@
             
             <li class="detailSidebar__item item--comment">
                 <span class="item__label">Comment: </span>
-                <span class="item__value">{{detailData.comment}}</span>
+                <span class="item__value item__value--comment">{{detailData.comment}}</span>
             </li>
             
             <li class="detailSidebar__item item--logoShape">
@@ -104,8 +107,7 @@
                 <span class="item__label">Order date: </span>
                 <span class="item__value">{{new Date(detailData.dateCreated).toLocaleDateString('en-GB')}}</span>
             </li>
-        </ul
-        >
+        </ul>
     </div>
 </template>
 
@@ -127,6 +129,32 @@
         overflow-y: auto;
         scrollbar-width: thin;
         scrollbar-color: var(--pink--main) var(--white);
+        position: relative;
+    }
+
+    .button__container--back{
+        position: absolute;
+        top: 0.5em;
+        right: 0.5em;
+        width: 4em;
+        padding: 0.5em 0.8em;
+        border-radius: var(--border-radius);
+        background-color: var(--pink--main);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: var(--font-size--xsmall);
+        font-weight: var(--font-weight--semi-bold);
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+
+    .button__container--back:hover > .button--back{
+        color: var(--yellow--main);
+    }
+
+    .icon--left{
+        margin-right: 0.2em;
     }
 
     .detailSidebar__title{
@@ -158,5 +186,10 @@
     .item__value {
         font-weight: 400;
         box-sizing: content-box;
+    }
+
+    .item__value--comment{
+        padding-right: 0.6em;
+        line-height: 1.15;
     }
 </style>
