@@ -14,6 +14,7 @@
     const removeMessage = ref('');
     const confirm = ref('');
     const layout = ref('list');
+    const sort = ref('dateCreated');
 
     if(!jwtToken.value) { router.push('/login'); }
     if(!new RegExp(/^[A-Za-z0-9-_]*\.[A-Za-z0-9-_]*\.[A-Za-z0-9-_]*$/).test(jwtToken.value)){ router.push('/login');}
@@ -38,7 +39,7 @@
     });
 
     const getDonuts = () => {
-        fetch(`https://donuttello-backend.onrender.com/api/v1/donuts?filter=${donutFilter.value}`, {
+        fetch(`https://donuttello-backend.onrender.com/api/v1/donuts?filter=${donutFilter.value}&sort=${sort.value}`, {
             method: "GET",
             headers: {
                 // "Access-Control-Allow-Origin": "*",
@@ -116,6 +117,11 @@
         confirm.value = "Are you sure you want to remove this donut?";
     }
 
+    function updateSort(sortBy) {
+        sort.value = sortBy;
+        getDonuts();
+    }
+
 
 </script>
 
@@ -129,7 +135,7 @@
                     <select name="filter" class="filter__input" id="filter" v-model="filter" v-on:change="changeFilter()">
                         <option value="all" selected>Alles</option>
                         <option value="ordered">Besteld</option>
-                        <option value="inProduction">In production</option>
+                        <option value="inProduction">In productie</option>
                         <option value="produced">Geproduceerd</option>
                     </select>
                 </div>
@@ -143,6 +149,23 @@
                     <h2 v-else-if="filter === 'ordered'">Open bestellingen</h2>
                     <h2 v-else-if="filter === 'inProduction'">In productie</h2>
                     <h2 v-else>Geproduceerd</h2>
+                </div>
+
+                <div class="donuts__container__sort">
+                    <div class="donuts__container__sort--date">
+                        <p class="sort--date sort__option" @click="updateSort('dateCreated')">Datum </p>
+                        <font-awesome-icon icon="fa-solid fa-angle-down" v-if="sort==='dateCreated'" />
+                    </div>
+
+                    <div class="donuts__container__sort--company">
+                        <p class="sort--company sort__option" @click="updateSort('company')">Bedrijf</p>
+                        <font-awesome-icon icon="fa-solid fa-angle-down" v-if="sort==='company'" /> 
+                    </div>
+
+                    <div class="donuts__container__sort--status">
+                        <p class="sort--status sort__option" @click="updateSort('orderStatus')">Status</p>
+                        <font-awesome-icon icon="fa-solid fa-angle-down" v-if="sort==='orderStatus'" /> 
+                    </div>
                 </div>
 
                 <div class="donut__list__container" v-if="layout==='list'">
@@ -219,6 +242,42 @@
         font-weight: var(--font-weight--bold);
         text-align: center;
     }
+
+    .donuts__container__sort{
+        display: flex;
+        align-items: center;
+        width: clamp(350px, 65%, 1800px);
+        height: 3em;
+        margin: 0 auto;
+        font-weight: var(--font-weight--semi-bold);
+        font-size: var(--font-size--small);
+        box-sizing: border-box;
+    }
+
+    .donuts__container__sort--date{
+        width: 4em;
+        margin: 0 1em 0 1.8em;
+        display: flex;
+
+    }
+    
+    .donuts__container__sort--company{
+        width: clamp(400px, 70%, 1200px);
+        display: flex;
+    }
+
+    .donuts__container__sort--status{
+        /* width: clamp(100px, 15%, 200px); */
+        width: 5.5em;
+        margin-right: calc(54px + 18ch + 2em);
+        display: flex;
+    }
+
+    .sort__option{
+        cursor: pointer;
+        width: 3em;
+    }
+
     .donut__list__container{
         display: flex;
         flex-direction: column;
@@ -226,8 +285,17 @@
         justify-content: center;
         gap: 1.5em;
         margin: 0 auto;
-        margin-top: var(--margin-xxxlarge);
+        /* margin-top: var(--margin-xlarge); */
         width: clamp(350px, 65%, 1800px);
+    }
+
+    .donut__card__container{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5em;
+        margin-top: var(--margin-xxxlarge);
     }
     
     a{
