@@ -2,6 +2,7 @@
     import { onMounted, onBeforeMount, ref } from 'vue'
     import Navigation from '../components/Navigation.vue';
     import DashboardSidebar from '../components/Dashboard/DashboardSidebar.vue';
+    import DonutList from '../components/Dashboard/DonutList.vue';
     import DonutCard from '../components/Dashboard/DonutCard.vue';
     import router from '../router';
 
@@ -12,6 +13,7 @@
     const isAdmin = ref(false);
     const removeMessage = ref('');
     const confirm = ref('');
+    const layout = ref('list');
 
     if(!jwtToken.value) { router.push('/login'); }
     if(!new RegExp(/^[A-Za-z0-9-_]*\.[A-Za-z0-9-_]*\.[A-Za-z0-9-_]*$/).test(jwtToken.value)){ router.push('/login');}
@@ -143,7 +145,13 @@
                     <h2 v-else>Geproduceerd</h2>
                 </div>
 
-                <div class="donut__card__container">
+                <div class="donut__list__container" v-if="layout==='list'">
+                    <div v-for="donut in donuts" :key="donut._id" class="donut__card">
+                        <a @click="routeDetail(donut._id)" ><DonutList :donut="donut" @removeDonut="removeDonut" @confirmRemove="confirmRemove"/></a>
+                    </div>
+                </div>
+
+                <div class="donut__card__container" v-else-if="layout==='grid'">
                     <div v-for="donut in donuts" :key="donut._id" class="donut__card">
                         <a @click="routeDetail(donut._id)" ><DonutCard :donut="donut" @removeDonut="removeDonut" @confirmRemove="confirmRemove"/></a>
                     </div>
@@ -211,7 +219,7 @@
         font-weight: var(--font-weight--bold);
         text-align: center;
     }
-    .donut__card__container{
+    .donut__list__container{
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
