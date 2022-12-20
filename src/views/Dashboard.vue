@@ -15,6 +15,7 @@
     const confirm = ref('');
     const layout = ref('list');
     const sort = ref('dateCreated');
+    const order = ref('asc');
 
     if(!jwtToken.value) { router.push('/login'); }
     if(!new RegExp(/^[A-Za-z0-9-_]*\.[A-Za-z0-9-_]*\.[A-Za-z0-9-_]*$/).test(jwtToken.value)){ router.push('/login');}
@@ -39,7 +40,7 @@
     });
 
     const getDonuts = () => {
-        fetch(`https://donuttello-backend.onrender.com/api/v1/donuts?filter=${donutFilter.value}&sort=${sort.value}`, {
+        fetch(`https://donuttello-backend.onrender.com/api/v1/donuts?filter=${donutFilter.value}&sort=${sort.value}&order=${order.value}`, {
             method: "GET",
             headers: {
                 // "Access-Control-Allow-Origin": "*",
@@ -122,6 +123,15 @@
         getDonuts();
     }
 
+    function changeOrder(){
+        if(order.value === 'asc'){
+            order.value = 'desc';
+        } else {
+            order.value = 'asc';
+        }
+        getDonuts();
+    }
+
 
 </script>
 
@@ -154,17 +164,17 @@
                 <div class="donuts__container__sort">
                     <div class="donuts__container__sort--date">
                         <p class="sort--date sort__option" @click="updateSort('dateCreated')">Datum </p>
-                        <font-awesome-icon icon="fa-solid fa-angle-down" v-if="sort==='dateCreated'" />
+                        <font-awesome-icon :class="order==='asc' ? '' : 'icon__arrow--reverse'" class="icon__arrow" icon="fa-solid fa-angle-down" v-if="sort==='dateCreated'" @click="changeOrder"/>
                     </div>
 
                     <div class="donuts__container__sort--company">
                         <p class="sort--company sort__option" @click="updateSort('company')">Bedrijf</p>
-                        <font-awesome-icon icon="fa-solid fa-angle-down" v-if="sort==='company'" /> 
+                        <font-awesome-icon :class="order==='asc' ? '' : 'icon__arrow--reverse'" class="icon__arrow"  icon="fa-solid fa-angle-down" v-if="sort==='company'" @click="changeOrder"/> 
                     </div>
 
                     <div class="donuts__container__sort--status">
                         <p class="sort--status sort__option" @click="updateSort('orderStatus')">Status</p>
-                        <font-awesome-icon icon="fa-solid fa-angle-down" v-if="sort==='orderStatus'" /> 
+                        <font-awesome-icon :class="order==='asc' ? '' : 'icon__arrow--reverse'" class="icon__arrow"  icon="fa-solid fa-angle-down" v-if="sort==='orderStatus'" @click="changeOrder"/> 
                     </div>
                 </div>
 
@@ -276,6 +286,23 @@
     .sort__option{
         cursor: pointer;
         width: 3em;
+    }
+
+    .sort--date{
+        width: 2.8em;
+    }
+
+    .icon__arrow{
+        cursor: pointer;
+        margin-top: 0.1em;
+    }
+
+    .icon__arrow:hover{
+        color: var(--pink--main);
+    }
+
+    .icon__arrow--reverse{
+        transform: rotate(180deg);
     }
 
     .donut__list__container{
