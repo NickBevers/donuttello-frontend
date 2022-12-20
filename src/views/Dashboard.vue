@@ -1,7 +1,6 @@
 <script setup>
     import { onMounted, onBeforeMount, ref } from 'vue'
     import Navigation from '../components/Navigation.vue';
-    import DashboardSidebar from '../components/Dashboard/DashboardSidebar.vue';
     import DonutList from '../components/Dashboard/DonutList.vue';
     import DonutCard from '../components/Dashboard/DonutCard.vue';
     import router from '../router';
@@ -16,6 +15,7 @@
     const layout = ref('list');
     const sort = ref('dateCreated');
     const order = ref('asc');
+    const donutId = ref('');
 
     if(!jwtToken.value) { router.push('/login'); }
     if(!new RegExp(/^[A-Za-z0-9-_]*\.[A-Za-z0-9-_]*\.[A-Za-z0-9-_]*$/).test(jwtToken.value)){ router.push('/login');}
@@ -71,7 +71,7 @@
     }
 
     function removeDonut(){
-        fetch(`https://donuttello-backend.onrender.com/api/v1/donuts/${props.donut._id}`, {
+        fetch(`https://donuttello-backend.onrender.com/api/v1/donuts/${donutId.value}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -81,6 +81,7 @@
         .then((response) => response.json())
         .then((data) => {
             if (data.status === "success") {
+                confirm.value = "";
                 getDonuts();
                 removeMessage.value = "The donut has been removed.";
                 setTimeout(() => {
@@ -114,12 +115,14 @@
         getDonuts();
     }
 
-    function confirmRemove() {
+    function confirmRemove(id) {
+        donutId.value = id;
         confirm.value = "Are you sure you want to remove this donut?";
     }
 
     function updateSort(sortBy) {
         sort.value = sortBy;
+        order.value = 'asc';
         getDonuts();
     }
 
@@ -151,8 +154,6 @@
                 </div>
             </div>
 
-            <DashboardSidebar />
-
             <div class="donuts__container">
                 <div class="donuts__container__title">
                     <h2 v-if="filter == 'all'">Alle Donuts</h2>
@@ -180,13 +181,13 @@
 
                 <div class="donut__list__container" v-if="layout==='list'">
                     <div v-for="donut in donuts" :key="donut._id" class="donut__card">
-                        <a @click="routeDetail(donut._id)" ><DonutList :donut="donut" @removeDonut="removeDonut" @confirmRemove="confirmRemove"/></a>
+                        <a @click="routeDetail(donut._id)" ><DonutList :donut="donut" @removeDonut="removeDonut" @confirmRemove="confirmRemove(donut._id)"/></a>
                     </div>
                 </div>
 
                 <div class="donut__card__container" v-else-if="layout==='grid'">
                     <div v-for="donut in donuts" :key="donut._id" class="donut__card">
-                        <a @click="routeDetail(donut._id)" ><DonutCard :donut="donut" @removeDonut="removeDonut" @confirmRemove="confirmRemove"/></a>
+                        <a @click="routeDetail(donut._id)" ><DonutCard :donut="donut" @removeDonut="removeDonut" @confirmRemove="confirmRemove()"/></a>
                     </div>
                 </div>
             </div>
@@ -351,7 +352,7 @@
         width: 100vw;
         height: 100vh;
         z-index: 100;
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         background-color: rgba(0, 0, 0, 0.5);
