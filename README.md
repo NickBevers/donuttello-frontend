@@ -1,7 +1,3 @@
-# Vue 3 + Vite
-
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+# De Donuttello 3D configurator
+Dit project werd gemaakt in opdracht van Donuttello. 
+De bedoeling van dit project was het maken van een 3D configurator waarbij klanten en bedrijven zelf een donut konden maken om die daarna te bestellen (in grotere hoeveelheden)
